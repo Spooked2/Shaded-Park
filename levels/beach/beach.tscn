@@ -11,6 +11,8 @@ shader = ExtResource("1_h5dy1")
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
 size = Vector2(20, 50)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k8g7j"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h5dy1"]
 render_priority = 0
 shader = ExtResource("1_hrlhh")
@@ -21,21 +23,26 @@ size = Vector2(50, 50)
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
 [node name="Player" parent="." unique_id=935656786 instance=ExtResource("1_k8g7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4587212, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4191153, 0)
 
-[node name="Sand" type="MeshInstance3D" parent="." unique_id=1756050013]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
+transform = Transform3D(-2.5859883e-08, 0.80622774, -0.59160525, 3.5241342e-08, 0.59160525, 0.8062278, 1, -7.1054265e-15, -4.3711395e-08, -132.8423, 375.9306, -82.95094)
+light_color = Color(0.975861, 0.7594072, 0.12035329, 1)
+light_energy = 8.0
+light_angular_distance = 0.5
+shadow_enabled = true
+
+[node name="Sand" type="StaticBody3D" parent="." unique_id=22225938]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sand" unique_id=1756050013]
 transform = Transform3D(0.9984611, -0.05545555, 0, 0.05545555, 0.9984611, 0, 0, 0, 1, -0.32640266, 0.36085606, 0)
 material_override = SubResource("ShaderMaterial_k8g7j")
 mesh = SubResource("PlaneMesh_i3yn0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sand" unique_id=898193961]
+shape = SubResource("WorldBoundaryShape3D_k8g7j")
 
 [node name="Ocean" type="MeshInstance3D" parent="." unique_id=2001608621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.574984, 0, 0)
 material_override = SubResource("ShaderMaterial_h5dy1")
 mesh = SubResource("PlaneMesh_hrlhh")
-
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
-transform = Transform3D(-2.5859883e-08, 0.80622786, -0.59160525, 3.5241342e-08, 0.5916053, 0.8062278, 1, 2.48867e-15, -4.3711385e-08, -132.8423, 375.9306, -82.95094)
-light_color = Color(0.975861, 0.7594072, 0.12035329, 1)
-light_energy = 8.0
-light_angular_distance = 0.5
-shadow_enabled = true
