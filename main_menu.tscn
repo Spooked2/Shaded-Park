@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dpsfncuawv3fy"]
+
+[ext_resource type="Script" uid="uid://cdevfge1oa8ky" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="Control" type="Control" unique_id=425275368]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Panel" type="Panel" parent="." unique_id=109737867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1367355944]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer" unique_id=1440897843]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer" unique_id=1410818128]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 96
+text = "Shaded Park"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=248635658]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/VBoxContainer" unique_id=852441010]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Start"
