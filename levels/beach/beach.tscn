@@ -4,6 +4,9 @@
 [ext_resource type="Shader" uid="uid://v78gugtikg7c" path="res://assets/shaders/beach/ocean.gdshader" id="1_hrlhh"]
 [ext_resource type="PackedScene" uid="uid://b37vsb5jvvn11" path="res://entities/player/player.tscn" id="1_k8g7j"]
 
+[sub_resource type="Environment" id="Environment_k8g7j"]
+background_color = Color(0.3372549, 0.39607844, 0.49019608, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8g7j"]
 render_priority = 0
 shader = ExtResource("1_h5dy1")
@@ -22,8 +25,8 @@ size = Vector2(50, 50)
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
-[node name="Player" parent="." unique_id=935656786 instance=ExtResource("1_k8g7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4191153, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=341217798]
+environment = SubResource("Environment_k8g7j")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
 transform = Transform3D(-2.5859883e-08, 0.80622774, -0.59160525, 3.5241342e-08, 0.59160525, 0.8062278, 1, -7.1054265e-15, -4.3711395e-08, -132.8423, 375.9306, -82.95094)
@@ -31,6 +34,9 @@ light_color = Color(0.975861, 0.7594072, 0.12035329, 1)
 light_energy = 8.0
 light_angular_distance = 0.5
 shadow_enabled = true
+
+[node name="Player" parent="." unique_id=935656786 instance=ExtResource("1_k8g7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4191153, 0)
 
 [node name="Sand" type="StaticBody3D" parent="." unique_id=22225938]
 
