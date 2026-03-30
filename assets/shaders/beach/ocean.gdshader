@@ -3,6 +3,7 @@ shader_type spatial;
 uniform sampler2D water_color_gradient;
 uniform sampler2D wave_break_noise;
 uniform float wave_speed: hint_range(0.0, 2.0) = 0.5;
+uniform float wave_amount: hint_range(0.1, 3.0) = 1.1;
 uniform float wave_start_position: hint_range(0.0, 0.9) = 0.7;
 
 float wave(float amp, float x, float wavelength, float speed) {
@@ -28,7 +29,7 @@ void fragment() {
 	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65);
 	float wave_sum = 0.075 * cos(wave1 + wave2 + wave3);
 	
-	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * 1.1) + wave_sum - fract(TIME * wave_speed)));
+	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * wave_amount) + wave_sum - fract(TIME * wave_speed)));
 	
 	// Make the waves fade in
 	float wave_fade = smoothstep(0.2, 1.0, wave_uv.x);
@@ -47,6 +48,16 @@ void fragment() {
 	if (wave_mask.x > 0.0) {
 		final_color += waves;
 	}
+	
+	// Add swash wave
+	float swash_wave = smoothstep(0.925, 1.0, UV.x);
+	final_color += swash_wave;
+	
+	float ebb = sin(waves);
+	
+	ebb = 0.5 * (1.0 - (ebb));
+	
+	ALPHA -= step(0.2, ebb * swash_wave);
 	
 	ALBEDO = final_color;
 }
