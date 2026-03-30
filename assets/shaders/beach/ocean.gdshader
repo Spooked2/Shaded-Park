@@ -23,9 +23,9 @@ void fragment() {
 	vec2 wave_uv = (UV - vec2(wave_start_position, 0.0)) * 5.0;
 	
 	// Make the waves wavy
-	float wave1 = wave(1.2, wave_uv.y, 1.1, 0.55);
-	float wave2 = wave(0.95, wave_uv.y, 0.9, 0.5);
-	float wave3 = wave(1.05, wave_uv.y, 1.2, 0.65);
+	float wave1 = wave(0.45, wave_uv.y, 0.25, 0.55);
+	float wave2 = wave(0.95, wave_uv.y, 0.6, 0.5);
+	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65);
 	float wave_sum = 0.075 * cos(wave1 + wave2 + wave3);
 	
 	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * 1.1) + wave_sum - fract(TIME * wave_speed)));
