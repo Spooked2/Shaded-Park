@@ -10,18 +10,28 @@ background_color = Color(0.3372549, 0.39607844, 0.49019608, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8g7j"]
 render_priority = 0
 shader = ExtResource("1_h5dy1")
+shader_parameter/base_color = Color(0.7613454, 0.65521103, 0.36146313, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
 size = Vector2(20, 50)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k8g7j"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_hrlhh"]
+size = Vector2(50, 50)
+
+[sub_resource type="Gradient" id="Gradient_k8g7j"]
+offsets = PackedFloat32Array(0.45535713, 1)
+colors = PackedColorArray(0.07134237, 0.28485674, 0.68227524, 1, 0.12675607, 0.48029912, 0.7254515, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3bnml"]
+gradient = SubResource("Gradient_k8g7j")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h5dy1"]
 render_priority = 0
 shader = ExtResource("1_hrlhh")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_hrlhh"]
-size = Vector2(50, 50)
+shader_parameter/water_color_gradient = SubResource("GradientTexture1D_3bnml")
+shader_parameter/wave_speed = 0.2000000095
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
@@ -50,5 +60,5 @@ shape = SubResource("WorldBoundaryShape3D_k8g7j")
 
 [node name="Ocean" type="MeshInstance3D" parent="." unique_id=2001608621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.574984, 0, 0)
-material_override = SubResource("ShaderMaterial_h5dy1")
 mesh = SubResource("PlaneMesh_hrlhh")
+surface_material_override/0 = SubResource("ShaderMaterial_h5dy1")
