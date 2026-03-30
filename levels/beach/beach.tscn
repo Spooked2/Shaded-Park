@@ -27,11 +27,27 @@ colors = PackedColorArray(0.07134237, 0.28485674, 0.68227524, 1, 0.12675607, 0.4
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_3bnml"]
 gradient = SubResource("Gradient_k8g7j")
 
+[sub_resource type="Gradient" id="Gradient_3bnml"]
+offsets = PackedFloat32Array(0, 0.28608248)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xiuwc"]
+noise_type = 2
+frequency = 0.0057
+cellular_distance_function = 1
+cellular_return_type = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_07d7i"]
+noise = SubResource("FastNoiseLite_xiuwc")
+color_ramp = SubResource("Gradient_3bnml")
+seamless = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h5dy1"]
 render_priority = 0
 shader = ExtResource("1_hrlhh")
 shader_parameter/water_color_gradient = SubResource("GradientTexture1D_3bnml")
+shader_parameter/wave_break_noise = SubResource("NoiseTexture2D_07d7i")
 shader_parameter/wave_speed = 0.2000000095
+shader_parameter/wave_start_position = 0.7
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
