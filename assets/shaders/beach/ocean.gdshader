@@ -53,15 +53,17 @@ void fragment() {
 	flow = 0.5 * (1.0 - (flow));
 	flow *= 1.5;
 	
-	// Hide some of the waves in the back
-	vec2 wave_mask = step(vec2(0.0), wave_uv);
-	if (wave_mask.x > 0.0) {
-		final_color += waves;
-	}
+	ALPHA *= max(smoothstep(1.0, 0.6, UV.x), 0.85);
 	
 	// Only apply the swash wave to the designated area
 	if (swash_wave > 0.0) {
 		ALPHA *= smoothstep(0.7, 0.2, flow * swash_wave);
+	}
+	
+	// Hide some of the waves in the back
+	vec2 wave_mask = step(vec2(0.0), wave_uv);
+	if (wave_mask.x > 0.0) {
+		final_color += waves;
 	}
 	
 	ALBEDO = final_color;

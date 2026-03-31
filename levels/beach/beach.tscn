@@ -67,6 +67,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4191153, 0)
 
 [node name="Sand" type="StaticBody3D" parent="." unique_id=22225938]
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Sand" unique_id=1862626489]
+transform = Transform3D(0.99078095, -0.13547347, 0, 0.13547347, 0.99078095, 0, 0, 0, 1, -34.809982, -2.952418, 0)
+material_override = SubResource("ShaderMaterial_k8g7j")
+mesh = SubResource("PlaneMesh_i3yn0")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sand" unique_id=1756050013]
 transform = Transform3D(0.99892825, -0.04628704, 0, 0.04628704, 0.99892825, 0, 0, 0, 1, -0.32640266, 0.36085606, 0)
 material_override = SubResource("ShaderMaterial_k8g7j")
