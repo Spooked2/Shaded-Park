@@ -13,7 +13,14 @@ float wave(float amp, float x, float wavelength, float speed) {
 }
 
 void vertex() {
-	// Called for every vertex the material is visible on.
+	float wave1 = wave(1.0, UV.y, 0.8, 1.1);
+	float wave2 = wave(1.2, VERTEX.z, 1.18, 1.14);
+	float wave3 = wave(0.9, UV.x, 1.22, 0.9);
+	float wave4 = wave(1.1, VERTEX.x, 0.83, 0.85);
+	
+	float wave_sum = 0.15 * cos(wave1 + wave2 + wave3 + wave4);
+	
+	VERTEX += NORMAL * wave_sum;
 }
 
 void fragment() {
