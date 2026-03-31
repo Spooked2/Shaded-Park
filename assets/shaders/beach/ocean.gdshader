@@ -6,21 +6,32 @@ uniform float wave_speed: hint_range(0.0, 2.0) = 0.5;
 uniform float wave_amount: hint_range(0.1, 3.0) = 1.1;
 uniform float wave_start_position: hint_range(0.0, 0.9) = 0.7;
 
-float wave(float amp, float x, float wavelength, float speed) {
+vec2 wave(float amp, float x, float wavelength, float speed) {
 	float freq = 2.0 / wavelength;
 	
-	return amp * sin(x * freq + (TIME * wave_speed) * (speed * freq));
+	return vec2(amp * sin(x * freq + (TIME * wave_speed) * (speed * freq)),
+	freq * amp * cos(x * freq + (TIME * wave_speed) * (speed * freq)));
 }
 
 void vertex() {
-	float wave1 = wave(1.0, UV.y, 0.8, 1.1);
-	float wave2 = wave(1.2, VERTEX.z, 1.18, 1.14);
-	float wave3 = wave(0.9, UV.x, 1.22, 0.9);
-	float wave4 = wave(1.1, VERTEX.x, 0.83, 0.85);
+	vec2 wave1 = wave(1.0, UV.y, 0.8, 1.1);
+	vec2 wave2 = wave(1.2, VERTEX.z, 1.18, 1.14);
+	vec2 wave3 = wave(0.9, UV.x, 1.22, 0.9);
+	vec2 wave4 = wave(1.1, VERTEX.x, 0.83, 0.85);
 	
-	float sine_wave_sum = wave1 + wave2 + wave3 + wave4;
+	float sine_wave_sum = sin(wave1.x + wave2.x + wave3.x + wave4.x);
 	
 	VERTEX += NORMAL * (sine_wave_sum * 0.05);
+	
+	//float cosine_wave_sum = wave1.y + wave2.y + wave3.y + wave4.y;
+	//
+	//vec3 tangent = vec3(1.0, 0.0, cosine_wave_sum);
+	//vec3 binormal = vec3(0.0, 1.0, cosine_wave_sum);
+	//
+	//vec3 normal = cross(tangent, binormal);
+	//
+	//NORMAL = normal;
+	
 }
 
 void fragment() {
@@ -31,9 +42,9 @@ void fragment() {
 	vec2 wave_uv = (UV - vec2(wave_start_position, 0.0)) * 5.0;
 	
 	// Make the waves wavy
-	float wave1 = wave(0.45, wave_uv.y, 0.25, 0.55);
-	float wave2 = wave(0.95, wave_uv.y, 0.6, 0.5);
-	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65);
+	float wave1 = wave(0.45, wave_uv.y, 0.25, 0.55).x;
+	float wave2 = wave(0.95, wave_uv.y, 0.6, 0.5).x;
+	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65).x;
 	float wave_sum = 0.075 * sin(wave1 + wave2 + wave3);
 	
 	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * wave_amount) + wave_sum - fract(TIME * wave_speed)));
@@ -79,7 +90,7 @@ void fragment() {
 void light() {
 	vec3 half_way = normalize(VIEW + LIGHT);
 	float half_way_dot = dot(NORMAL, half_way);
-	float specular_amount = max(pow(half_way_dot, 23.0 * 23.0), 0.0) * ATTENUATION;
+	float specular_amount = pow(half_way_dot, 23.0 * 23.0) * ATTENUATION;
 	SPECULAR_LIGHT += 0.2 * specular_amount * LIGHT_COLOR;
 	
 	DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * LIGHT_COLOR / PI;
