@@ -58,7 +58,7 @@ shader_parameter/wave_start_position = 0.5910000280725
 environment = SubResource("Environment_k8g7j")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
-transform = Transform3D(-3.0287023e-10, 0.999976, -0.006929027, 4.3710347e-08, 0.006929027, 0.999976, 1, -7.105428e-15, -4.3711392e-08, 0.8615265, 375.9306, -82.95094)
+transform = Transform3D(-0.1287956, 0.9744288, -0.18412024, 0, 0.18566664, 0.9826128, 0.99167114, 0.1265562, -0.023913044, -49.45382, 24.154816, -5.404437)
 light_color = Color(0.99892086, 0.8995953, 0.6727849, 1)
 light_energy = 6.0
 light_angular_distance = 0.5

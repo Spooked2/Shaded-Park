@@ -18,9 +18,9 @@ void vertex() {
 	float wave3 = wave(0.9, UV.x, 1.22, 0.9);
 	float wave4 = wave(1.1, VERTEX.x, 0.83, 0.85);
 	
-	float wave_sum = 0.15 * cos(wave1 + wave2 + wave3 + wave4);
+	float sine_wave_sum = wave1 + wave2 + wave3 + wave4;
 	
-	VERTEX += NORMAL * wave_sum;
+	VERTEX += NORMAL * (sine_wave_sum * 0.05);
 }
 
 void fragment() {
@@ -75,3 +75,13 @@ void fragment() {
 	
 	ALBEDO = final_color;
 }
+
+void light() {
+	vec3 half_way = normalize(VIEW + LIGHT);
+	float half_way_dot = dot(NORMAL, half_way);
+	float specular_amount = max(pow(half_way_dot, 23.0 * 23.0), 0.0) * ATTENUATION;
+	SPECULAR_LIGHT += 0.2 * specular_amount * LIGHT_COLOR;
+	
+	DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * LIGHT_COLOR / PI;
+}
+
