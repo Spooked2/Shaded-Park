@@ -13,7 +13,7 @@ shader = ExtResource("1_h5dy1")
 shader_parameter/base_color = Color(0.7613454, 0.65521103, 0.36146313, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
-size = Vector2(20, 50)
+size = Vector2(35, 50)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k8g7j"]
 
@@ -48,7 +48,7 @@ shader_parameter/water_color_gradient = SubResource("GradientTexture1D_3bnml")
 shader_parameter/wave_break_noise = SubResource("NoiseTexture2D_07d7i")
 shader_parameter/wave_speed = 0.5
 shader_parameter/wave_amount = 1.1
-shader_parameter/wave_start_position = 0.7
+shader_parameter/wave_start_position = 0.5910000280725
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
@@ -68,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56738985, 1.4191153, 0)
 [node name="Sand" type="StaticBody3D" parent="." unique_id=22225938]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sand" unique_id=1756050013]
-transform = Transform3D(0.9984611, -0.05545555, 0, 0.05545555, 0.9984611, 0, 0, 0, 1, -0.32640266, 0.36085606, 0)
+transform = Transform3D(0.99892825, -0.04628704, 0, 0.04628704, 0.99892825, 0, 0, 0, 1, -0.32640266, 0.36085606, 0)
 material_override = SubResource("ShaderMaterial_k8g7j")
 mesh = SubResource("PlaneMesh_i3yn0")
 

@@ -27,7 +27,7 @@ void fragment() {
 	float wave1 = wave(0.45, wave_uv.y, 0.25, 0.55);
 	float wave2 = wave(0.95, wave_uv.y, 0.6, 0.5);
 	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65);
-	float wave_sum = 0.075 * cos(wave1 + wave2 + wave3);
+	float wave_sum = 0.075 * sin(wave1 + wave2 + wave3);
 	
 	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * wave_amount) + wave_sum - fract(TIME * wave_speed)));
 	
@@ -43,21 +43,26 @@ void fragment() {
 	
 	waves = max(waves - wave_break_final, 0.0);
 	
+	// Add swash wave
+	float swash_wave = smoothstep(0.88, 1.0, UV.x);
+	final_color += swash_wave;
+	
+	float flow = cos(TAU * waves + 3.5);
+	
+	// Normalize the wave so the output is always between 0 and 1
+	flow = 0.5 * (1.0 - (flow));
+	flow *= 1.5;
+	
 	// Hide some of the waves in the back
 	vec2 wave_mask = step(vec2(0.0), wave_uv);
 	if (wave_mask.x > 0.0) {
 		final_color += waves;
 	}
 	
-	// Add swash wave
-	float swash_wave = smoothstep(0.925, 1.0, UV.x);
-	final_color += swash_wave;
-	
-	float ebb = sin(waves);
-	
-	ebb = 0.5 * (1.0 - (ebb));
-	
-	ALPHA -= step(0.2, ebb * swash_wave);
+	// Only apply the swash wave to the designated area
+	if (swash_wave > 0.0) {
+		ALPHA *= smoothstep(0.7, 0.2, flow * swash_wave);
+	}
 	
 	ALBEDO = final_color;
 }
