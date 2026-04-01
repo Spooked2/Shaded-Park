@@ -15,15 +15,32 @@ vec2 wave(float amp, float x, float wavelength, float speed) {
 	freq * amp * cos(x * freq + (TIME * wave_speed) * (speed * freq)));
 }
 
+vec3 wave_v2(vec2 pos, float amp, float wavelength, float time_scale) {
+	float freq = 2.0 / wavelength;
+	float time = TIME * wave_speed;
+	float speed_mod = time_scale * freq;
+	
+	float input_x = pos.x * freq - time * speed_mod;
+	float input_y = pos.y * freq - time * speed_mod * 2.0;
+	float input_z = input_x + input_y;
+	
+	float sine_result = amp * sin(input_z) * pos.x;
+	
+	float cosine_x = cos(input_z) * freq * amp * pos.x + sin(input_z) * amp;
+	float cosine_y = cos(input_z) * freq * amp * pos.x * 2.0;
+	
+	return vec3(sine_result, cosine_x, cosine_y);
+}
+
 void vertex() {
-	vec2 wave1 = wave(1.8, UV.y, 0.2, wave_time_scale);
-	vec2 wave2 = wave(1.4, -UV.y, 0.7, wave_time_scale);
-	vec2 wave3 = wave(0.8, UV.y, 1.1, wave_time_scale);
-	vec2 wave4 = wave(0.4, -UV.y, 2.25, wave_time_scale);
-	vec2 wave5 = wave(1.8, -UV.x, 0.2, wave_time_scale);
-	vec2 wave6 = wave(1.4, UV.x, 0.7, wave_time_scale);
-	vec2 wave7 = wave(0.8, -UV.x, 1.1, wave_time_scale);
-	vec2 wave8 = wave(0.4, UV.x, 2.25, wave_time_scale);
+	vec3 wave1 = wave_v2(UV.xx, 1.8, 0.2, wave_time_scale);
+	vec3 wave2 = wave_v2(-UV, 1.4, 0.7, wave_time_scale);
+	vec3 wave3 = wave_v2(UV.xx, 0.8, 1.1, wave_time_scale);
+	vec3 wave4 = wave_v2(-UV, 0.4, 2.25, wave_time_scale);
+	vec3 wave5 = wave_v2(-UV.yy, 1.6, 0.4, wave_time_scale);
+	vec3 wave6 = wave_v2(UV.yy, 1.2, 0.9, wave_time_scale);
+	vec3 wave7 = wave_v2(-UV.yy, 0.8, 1.25, wave_time_scale);
+	vec3 wave8 = wave_v2(UV.yx, 0.2, 2.25, wave_time_scale);
 	
 	float sine_wave_sum = sin(wave1.x 
 	+ wave2.x 
@@ -36,7 +53,7 @@ void vertex() {
 	
 	VERTEX += NORMAL * (sine_wave_sum * wave_intensity);
 	
-	float cosine_wave_sum = (wave1.y 
+	float cosine_wave_sum_x = (wave1.y 
 	+ wave2.y 
 	+ wave3.y 
 	+ wave4.y
@@ -45,12 +62,16 @@ void vertex() {
 	+ wave7.y 
 	+ wave8.y) * wave_intensity;
 	
-	vec3 tangent = vec3(1.0, 0.0, cosine_wave_sum);
-	vec3 binormal = vec3(0.0, 1.0, cosine_wave_sum);
+	float cosine_wave_sum_y = (wave1.z 
+	+ wave2.z 
+	+ wave3.z 
+	+ wave4.z
+	+ wave5.z 
+	+ wave6.z 
+	+ wave7.z 
+	+ wave8.z) * wave_intensity;
 	
-	vec3 normal = cross(tangent, binormal);
-	
-	NORMAL += NORMAL * normalize(normal);
+	NORMAL += normalize(vec3(cosine_wave_sum_x, 1.0, cosine_wave_sum_y));
 	
 }
 

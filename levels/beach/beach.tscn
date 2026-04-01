@@ -52,7 +52,7 @@ shader_parameter/wave_speed = 0.5
 shader_parameter/wave_amount = 1.10000004899012
 shader_parameter/wave_start_position = 0.5910000280725
 shader_parameter/wave_time_scale = 0.2000000095
-shader_parameter/wave_intensity = 0.130000006175
+shader_parameter/wave_intensity = 0.13
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
