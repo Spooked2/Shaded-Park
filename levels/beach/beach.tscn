@@ -49,8 +49,10 @@ shader = ExtResource("1_hrlhh")
 shader_parameter/water_color_gradient = SubResource("GradientTexture1D_3bnml")
 shader_parameter/wave_break_noise = SubResource("NoiseTexture2D_07d7i")
 shader_parameter/wave_speed = 0.5
-shader_parameter/wave_amount = 1.1
+shader_parameter/wave_amount = 1.10000004899012
 shader_parameter/wave_start_position = 0.5910000280725
+shader_parameter/wave_time_scale = 0.2000000095
+shader_parameter/wave_intensity = 0.130000006175
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
@@ -80,6 +82,7 @@ material_override = SubResource("ShaderMaterial_k8g7j")
 mesh = SubResource("PlaneMesh_i3yn0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sand" unique_id=898193961]
+visible = false
 shape = SubResource("WorldBoundaryShape3D_k8g7j")
 
 [node name="Ocean" type="MeshInstance3D" parent="." unique_id=2001608621]

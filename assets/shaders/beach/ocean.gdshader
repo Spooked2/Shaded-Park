@@ -5,6 +5,8 @@ uniform sampler2D wave_break_noise;
 uniform float wave_speed: hint_range(0.0, 2.0) = 0.5;
 uniform float wave_amount: hint_range(0.1, 3.0) = 1.1;
 uniform float wave_start_position: hint_range(0.0, 0.9) = 0.7;
+uniform float wave_time_scale: hint_range(0.0, 2.0) = 0.2;
+uniform float wave_intensity: hint_range(0.0, 2.0) = 0.13;
 
 vec2 wave(float amp, float x, float wavelength, float speed) {
 	float freq = 2.0 / wavelength;
@@ -14,23 +16,41 @@ vec2 wave(float amp, float x, float wavelength, float speed) {
 }
 
 void vertex() {
-	vec2 wave1 = wave(1.0, UV.y, 0.8, 1.1);
-	vec2 wave2 = wave(1.2, VERTEX.z, 1.18, 1.14);
-	vec2 wave3 = wave(0.9, UV.x, 1.22, 0.9);
-	vec2 wave4 = wave(1.1, VERTEX.x, 0.83, 0.85);
+	vec2 wave1 = wave(1.8, UV.y, 0.2, wave_time_scale);
+	vec2 wave2 = wave(1.4, -UV.y, 0.7, wave_time_scale);
+	vec2 wave3 = wave(0.8, UV.y, 1.1, wave_time_scale);
+	vec2 wave4 = wave(0.4, -UV.y, 2.25, wave_time_scale);
+	vec2 wave5 = wave(1.8, -UV.x, 0.2, wave_time_scale);
+	vec2 wave6 = wave(1.4, UV.x, 0.7, wave_time_scale);
+	vec2 wave7 = wave(0.8, -UV.x, 1.1, wave_time_scale);
+	vec2 wave8 = wave(0.4, UV.x, 2.25, wave_time_scale);
 	
-	float sine_wave_sum = sin(wave1.x + wave2.x + wave3.x + wave4.x);
+	float sine_wave_sum = sin(wave1.x 
+	+ wave2.x 
+	+ wave3.x 
+	+ wave4.x
+	+ wave5.x 
+	+ wave6.x 
+	+ wave7.x 
+	+ wave8.x);
 	
-	VERTEX += NORMAL * (sine_wave_sum * 0.05);
+	VERTEX += NORMAL * (sine_wave_sum * wave_intensity);
 	
-	//float cosine_wave_sum = wave1.y + wave2.y + wave3.y + wave4.y;
-	//
-	//vec3 tangent = vec3(1.0, 0.0, cosine_wave_sum);
-	//vec3 binormal = vec3(0.0, 1.0, cosine_wave_sum);
-	//
-	//vec3 normal = cross(tangent, binormal);
-	//
-	//NORMAL = normal;
+	float cosine_wave_sum = (wave1.y 
+	+ wave2.y 
+	+ wave3.y 
+	+ wave4.y
+	+ wave5.y 
+	+ wave6.y 
+	+ wave7.y 
+	+ wave8.y) * wave_intensity;
+	
+	vec3 tangent = vec3(1.0, 0.0, cosine_wave_sum);
+	vec3 binormal = vec3(0.0, 1.0, cosine_wave_sum);
+	
+	vec3 normal = cross(tangent, binormal);
+	
+	NORMAL += NORMAL * normalize(normal);
 	
 }
 
@@ -41,11 +61,14 @@ void fragment() {
 	// Create some scrolling white foam waves and overlay them on top of the base color
 	vec2 wave_uv = (UV - vec2(wave_start_position, 0.0)) * 5.0;
 	
-	// Make the waves wavy
-	float wave1 = wave(0.45, wave_uv.y, 0.25, 0.55).x;
-	float wave2 = wave(0.95, wave_uv.y, 0.6, 0.5).x;
-	float wave3 = wave(0.55, wave_uv.y, 0.4, 0.65).x;
-	float wave_sum = 0.075 * sin(wave1 + wave2 + wave3);
+	// Make the foam waves wavy
+	float wave1 = wave(1.25, wave_uv.y, 0.45, wave_time_scale).x;
+	float wave2 = wave(0.95, -wave_uv.x, 1.1, wave_time_scale).x;
+	float wave3 = wave(0.55, wave_uv.y, 1.6, wave_time_scale).x;
+	float wave4 = wave(1.45, wave_uv.y, 0.45, wave_time_scale).x;
+	float wave5 = wave(0.75, -wave_uv.y, 1.3, wave_time_scale).x;
+	float wave6 = wave(0.45, wave_uv.x, 1.9, wave_time_scale).x;
+	float wave_sum = 0.05 * sin(wave1 + wave2 + wave3 + wave4 + wave5 + wave6);
 	
 	float waves = smoothstep(0.5, 2.5, fract((wave_uv.x * wave_amount) + wave_sum - fract(TIME * wave_speed)));
 	
