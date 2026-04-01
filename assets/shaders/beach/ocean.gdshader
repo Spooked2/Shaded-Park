@@ -20,7 +20,7 @@ vec3 wave_v2(vec2 pos, float amp, float wavelength, float time_scale) {
 	float time = TIME * wave_speed;
 	float speed_mod = time_scale * freq;
 	
-	float input_x = pos.x * freq - time * speed_mod;
+	float input_x = pos.x * freq + time * speed_mod;
 	float input_y = pos.y * freq - time * speed_mod * 2.0;
 	float input_z = input_x + input_y;
 	
@@ -34,14 +34,34 @@ vec3 wave_v2(vec2 pos, float amp, float wavelength, float time_scale) {
 
 void vertex() {
 	vec3 wave_array[] = {
-		wave_v2(UV.xx, 1.8, 0.2, wave_time_scale),
-		wave_v2(-UV, 1.4, 0.7, wave_time_scale),
-		wave_v2(UV.xx, 0.8, 1.1, wave_time_scale),
-		wave_v2(-UV, 0.4, 2.25, wave_time_scale),
-		wave_v2(-UV.yy, 1.6, 0.4, wave_time_scale),
-		wave_v2(UV.yy, 1.2, 0.9, wave_time_scale),
-		wave_v2(-UV.yy, 0.8, 1.25, wave_time_scale),
-		wave_v2(UV.yx, 0.2, 2.25, wave_time_scale)
+		// Big waves
+		wave_v2(vec2(1.0) - UV.xy, 2.8, 6.4, wave_time_scale),
+		wave_v2(-UV.yy, 2.25, 0.13, wave_time_scale),
+		wave_v2(vec2(1.0) - UV.xx, 2.5, 0.27, wave_time_scale),
+		wave_v2(UV.xy, 3.0, 0.1, wave_time_scale),
+		wave_v2(vec2(1.0) - UV.yy, 2.7, 0.4, wave_time_scale),
+		
+		// Medium waves
+		wave_v2(UV.xy, 1.3, 0.75, wave_time_scale),
+		wave_v2(vec2(1.0) - UV.yy, 0.8, 1.25, wave_time_scale),
+		wave_v2(-UV.xx, 0.95, 1.05, wave_time_scale),
+		wave_v2(vec2(1.0) - -UV.xy, 1.2, 0.9, wave_time_scale),
+		wave_v2(UV.xy, 1.25, 0.85, wave_time_scale),
+		wave_v2(UV.yy, 0.95, 1.05, wave_time_scale),
+		wave_v2(vec2(1.0) - -UV.xx, 1.1, 1.0, wave_time_scale),
+		wave_v2(-UV.xy, 0.85, 1.15, wave_time_scale),
+		
+		// Tiny waves
+		wave_v2(vec2(1.0) - -UV.yx, 0.1, 4.25, wave_time_scale),
+		wave_v2(vec2(1.0) - UV.xx, 0.05, 8.0, wave_time_scale),
+		wave_v2(-UV, 0.15, 3.5, wave_time_scale),
+		wave_v2(UV.yy, 0.3, 2.75, wave_time_scale),
+		wave_v2(vec2(1.0) - -UV, 0.1, 6.25, wave_time_scale),
+		wave_v2(UV.yx, 0.25, 5.75, wave_time_scale),
+		wave_v2(-UV, 0.175, 5.05, wave_time_scale),
+		wave_v2(vec2(1.0) - UV, 0.125, 6.25, wave_time_scale),
+		wave_v2(-UV, 0.35, 2.55, wave_time_scale),
+		wave_v2(UV.yx, 0.2, 3.95, wave_time_scale)
 		};
 	
 	vec3 wave_sums = vec3(0.0);
@@ -52,7 +72,7 @@ void vertex() {
 		wave_sums.z += wave_array[i].z;
 	}
 	
-	wave_sums *= wave_intensity;
+	wave_sums *= (wave_intensity * (1.0 - UV.x));
 	
 	VERTEX.y += wave_sums.x;
 	
