@@ -6,7 +6,8 @@ uniform float wave_speed: hint_range(0.0, 2.0) = 0.5;
 uniform float wave_amount: hint_range(0.1, 3.0) = 1.1;
 uniform float wave_start_position: hint_range(0.0, 0.9) = 0.7;
 uniform float wave_time_scale: hint_range(0.0, 2.0) = 0.2;
-uniform float wave_intensity: hint_range(0.0, 2.0) = 0.13;
+uniform float wave_intensity: hint_range(0.0, 2.0) = 0.1;
+uniform float wave_scale: hint_range(0.0, 4.0) = 1.0;
 
 vec2 wave(float amp, float x, float wavelength, float speed) {
 	float freq = 2.0 / wavelength;
@@ -33,35 +34,41 @@ vec3 wave_v2(vec2 pos, float amp, float wavelength, float time_scale) {
 }
 
 void vertex() {
+	vec2 top_left = UV * wave_scale;
+	vec2 top_right = vec2((1.0 * wave_scale) - top_left.x, top_left.y);
+	vec2 bottom_left = vec2(top_left.x, (1.0 * wave_scale) - top_left.y);
+	vec2 bottom_right = vec2((1.0 * wave_scale) - top_left.x, (1.0 * wave_scale) - top_left.y);
+	
 	vec3 wave_array[] = {
 		// Big waves
-		wave_v2(vec2(1.0) - UV.xy, 2.8, 6.4, wave_time_scale),
-		wave_v2(-UV.yy, 2.25, 0.13, wave_time_scale),
-		wave_v2(vec2(1.0) - UV.xx, 2.5, 0.27, wave_time_scale),
-		wave_v2(UV.xy, 3.0, 0.1, wave_time_scale),
-		wave_v2(vec2(1.0) - UV.yy, 2.7, 0.4, wave_time_scale),
+		wave_v2(top_left, 1.0, 2.0, wave_time_scale),
+		wave_v2(top_right, 0.95, 1.9, wave_time_scale),
+		wave_v2(bottom_left, 0.99, 1.75, wave_time_scale),
+		wave_v2(bottom_right, 0.9, 1.25, wave_time_scale),
 		
 		// Medium waves
-		wave_v2(UV.xy, 1.3, 0.75, wave_time_scale),
-		wave_v2(vec2(1.0) - UV.yy, 0.8, 1.25, wave_time_scale),
-		wave_v2(-UV.xx, 0.95, 1.05, wave_time_scale),
-		wave_v2(vec2(1.0) - -UV.xy, 1.2, 0.9, wave_time_scale),
-		wave_v2(UV.xy, 1.25, 0.85, wave_time_scale),
-		wave_v2(UV.yy, 0.95, 1.05, wave_time_scale),
-		wave_v2(vec2(1.0) - -UV.xx, 1.1, 1.0, wave_time_scale),
-		wave_v2(-UV.xy, 0.85, 1.15, wave_time_scale),
+		wave_v2(top_left, 0.75, 0.25, wave_time_scale),
+		wave_v2(top_right, 0.85, 0.3, wave_time_scale),
+		wave_v2(bottom_left, 0.90, 0.2, wave_time_scale),
+		wave_v2(bottom_right, 0.65, 0.21, wave_time_scale),
+		wave_v2(-top_left, 0.8, 0.27, wave_time_scale),
+		wave_v2(-top_right, 0.6, 0.22, wave_time_scale),
+		wave_v2(-bottom_left, 0.7, 0.28, wave_time_scale),
+		wave_v2(-bottom_right, 0.78, 0.24, wave_time_scale),
+		
+		// Small waves
+		wave_v2(top_left, 0.3, 0.1, wave_time_scale),
+		wave_v2(top_right, 0.28, 0.09, wave_time_scale),
+		wave_v2(bottom_left, 0.29, 0.085, wave_time_scale),
+		wave_v2(bottom_right, 0.25, 0.08, wave_time_scale),
 		
 		// Tiny waves
-		wave_v2(vec2(1.0) - -UV.yx, 0.1, 4.25, wave_time_scale),
-		wave_v2(vec2(1.0) - UV.xx, 0.05, 8.0, wave_time_scale),
-		wave_v2(-UV, 0.15, 3.5, wave_time_scale),
-		wave_v2(UV.yy, 0.3, 2.75, wave_time_scale),
-		wave_v2(vec2(1.0) - -UV, 0.1, 6.25, wave_time_scale),
-		wave_v2(UV.yx, 0.25, 5.75, wave_time_scale),
-		wave_v2(-UV, 0.175, 5.05, wave_time_scale),
-		wave_v2(vec2(1.0) - UV, 0.125, 6.25, wave_time_scale),
-		wave_v2(-UV, 0.35, 2.55, wave_time_scale),
-		wave_v2(UV.yx, 0.2, 3.95, wave_time_scale)
+		wave_v2(-top_left, 0.1, 0.05, wave_time_scale),
+		wave_v2(-top_right, 0.08, 0.049, wave_time_scale),
+		wave_v2(-bottom_left, 0.06, 0.045, wave_time_scale),
+		wave_v2(-bottom_right, 0.05, 0.04, wave_time_scale),
+		
+		wave_v2(top_left, 0.0, 0.0, wave_time_scale)
 		};
 	
 	vec3 wave_sums = vec3(0.0);
@@ -138,7 +145,7 @@ void fragment() {
 void light() {
 	vec3 half_way = normalize(VIEW + LIGHT);
 	float half_way_dot = dot(NORMAL, half_way);
-	float specular_amount = pow(half_way_dot, 23.0 * 23.0) * ATTENUATION;
+	float specular_amount = pow(half_way_dot, 200.0) * ATTENUATION;
 	SPECULAR_LIGHT += 0.2 * specular_amount * LIGHT_COLOR;
 	
 	DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * LIGHT_COLOR / PI;

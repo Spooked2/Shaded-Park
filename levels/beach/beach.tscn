@@ -51,8 +51,9 @@ shader_parameter/wave_break_noise = SubResource("NoiseTexture2D_07d7i")
 shader_parameter/wave_speed = 0.5
 shader_parameter/wave_amount = 1.10000004899012
 shader_parameter/wave_start_position = 0.5910000280725
-shader_parameter/wave_time_scale = 0.2
-shader_parameter/wave_intensity = 0.13
+shader_parameter/wave_time_scale = 0.10000000475
+shader_parameter/wave_intensity = 0.400000019
+shader_parameter/wave_scale = 1.0
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
