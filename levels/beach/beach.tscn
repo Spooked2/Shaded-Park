@@ -19,8 +19,8 @@ size = Vector2(35, 50)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hrlhh"]
 size = Vector2(50, 50)
-subdivide_width = 64
-subdivide_depth = 64
+subdivide_width = 128
+subdivide_depth = 128
 
 [sub_resource type="Gradient" id="Gradient_k8g7j"]
 offsets = PackedFloat32Array(0.45535713, 1)
@@ -48,12 +48,12 @@ render_priority = 0
 shader = ExtResource("1_hrlhh")
 shader_parameter/water_color_gradient = SubResource("GradientTexture1D_3bnml")
 shader_parameter/wave_break_noise = SubResource("NoiseTexture2D_07d7i")
-shader_parameter/wave_speed = 0.5
+shader_parameter/wave_speed = 0.50000002375
 shader_parameter/wave_amount = 1.10000004899012
 shader_parameter/wave_start_position = 0.5910000280725
-shader_parameter/wave_time_scale = 0.10000000475
-shader_parameter/wave_intensity = 0.400000019
-shader_parameter/wave_scale = 1.0
+shader_parameter/wave_time_scale = 0.2
+shader_parameter/wave_intensity = 1.0000000475
+shader_parameter/wave_scale = 1.0000000475
 
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
@@ -61,7 +61,7 @@ shader_parameter/wave_scale = 1.0
 environment = SubResource("Environment_k8g7j")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
-transform = Transform3D(-0.1287956, 0.9744288, -0.18412024, 0, 0.18566664, 0.9826128, 0.99167114, 0.1265562, -0.023913044, -49.45382, 24.154816, -5.404437)
+transform = Transform3D(-3.2150513e-08, -0.89219993, -0.45164073, -2.9614695e-08, -0.45164073, 0.89219993, -1, 4.2059884e-08, -1.1901749e-08, -49.45382, 24.154816, -5.404437)
 light_color = Color(0.99892086, 0.8995953, 0.6727849, 1)
 light_energy = 6.0
 light_angular_distance = 0.5

@@ -6,8 +6,10 @@ uniform float wave_speed: hint_range(0.0, 2.0) = 0.5;
 uniform float wave_amount: hint_range(0.1, 3.0) = 1.1;
 uniform float wave_start_position: hint_range(0.0, 0.9) = 0.7;
 uniform float wave_time_scale: hint_range(0.0, 2.0) = 0.2;
-uniform float wave_intensity: hint_range(0.0, 2.0) = 0.1;
+uniform float wave_intensity: hint_range(0.0, 5.0) = 1.0;
 uniform float wave_scale: hint_range(0.0, 4.0) = 1.0;
+
+const int wave_detail = 128;
 
 vec2 wave(float amp, float x, float wavelength, float speed) {
 	float freq = 2.0 / wavelength;
@@ -16,74 +18,55 @@ vec2 wave(float amp, float x, float wavelength, float speed) {
 	freq * amp * cos(x * freq + (TIME * wave_speed) * (speed * freq)));
 }
 
-vec3 wave_v2(vec2 pos, float amp, float wavelength, float time_scale) {
-	float freq = 2.0 / wavelength;
-	float time = TIME * wave_speed;
-	float speed_mod = time_scale * freq;
+vec3 fbm(vec3 value, float base_seed) {
+	float freq = 1.0;
+	float amp = 1.0;
+	float speed = 2.0 * wave_time_scale;
+	float seed = base_seed;
 	
-	float input_x = pos.x * freq + time * speed_mod;
-	float input_y = pos.y * freq - time * speed_mod * 2.0;
-	float input_z = input_x + input_y;
+	vec3 variable_value = value;
 	
-	float sine_result = amp * sin(input_z) * pos.x;
+	float sine_sum = 0.0;
+	vec2 cosine_sum = vec2(0.0);
+	float amp_sum = 0.0;
 	
-	float cosine_x = cos(input_z) * freq * amp * pos.x + sin(input_z) * amp;
-	float cosine_y = cos(input_z) * freq * amp * pos.x * 2.0;
+	float max_peak = 1.0;
+	float peak_offset = 1.2;
+	float drag = 0.5;
 	
-	return vec3(sine_result, cosine_x, cosine_y);
+	for (int i = 0; i < wave_detail; i++) {
+		vec2 direction = normalize(vec2(cos(seed), sin(seed)));
+		
+		float wave_base = dot(direction, variable_value.xz) * freq + (TIME * speed);
+		float new_wave = amp * exp(max_peak * sin(wave_base) - peak_offset);
+		vec2 differential = freq * direction * (max_peak * new_wave * cos(wave_base));
+		
+		sine_sum += new_wave;
+		variable_value.xz += -differential * amp * drag;
+		
+		cosine_sum += differential;
+		
+		amp_sum += amp;
+		amp *= 0.82;
+		freq *= 1.18;
+		speed *= 1.1;
+		seed += 4.3;
+	}
+	
+	vec3 output = vec3(sine_sum, cosine_sum) / amp_sum;
+	output.x *= 1.48;
+	
+	return output;
 }
 
 void vertex() {
-	vec2 top_left = UV * wave_scale;
-	vec2 top_right = vec2((1.0 * wave_scale) - top_left.x, top_left.y);
-	vec2 bottom_left = vec2(top_left.x, (1.0 * wave_scale) - top_left.y);
-	vec2 bottom_right = vec2((1.0 * wave_scale) - top_left.x, (1.0 * wave_scale) - top_left.y);
-	
-	vec3 wave_array[] = {
-		// Big waves
-		wave_v2(top_left, 1.0, 2.0, wave_time_scale),
-		wave_v2(top_right, 0.95, 1.9, wave_time_scale),
-		wave_v2(bottom_left, 0.99, 1.75, wave_time_scale),
-		wave_v2(bottom_right, 0.9, 1.25, wave_time_scale),
-		
-		// Medium waves
-		wave_v2(top_left, 0.75, 0.25, wave_time_scale),
-		wave_v2(top_right, 0.85, 0.3, wave_time_scale),
-		wave_v2(bottom_left, 0.90, 0.2, wave_time_scale),
-		wave_v2(bottom_right, 0.65, 0.21, wave_time_scale),
-		wave_v2(-top_left, 0.8, 0.27, wave_time_scale),
-		wave_v2(-top_right, 0.6, 0.22, wave_time_scale),
-		wave_v2(-bottom_left, 0.7, 0.28, wave_time_scale),
-		wave_v2(-bottom_right, 0.78, 0.24, wave_time_scale),
-		
-		// Small waves
-		wave_v2(top_left, 0.3, 0.1, wave_time_scale),
-		wave_v2(top_right, 0.28, 0.09, wave_time_scale),
-		wave_v2(bottom_left, 0.29, 0.085, wave_time_scale),
-		wave_v2(bottom_right, 0.25, 0.08, wave_time_scale),
-		
-		// Tiny waves
-		wave_v2(-top_left, 0.1, 0.05, wave_time_scale),
-		wave_v2(-top_right, 0.08, 0.049, wave_time_scale),
-		wave_v2(-bottom_left, 0.06, 0.045, wave_time_scale),
-		wave_v2(-bottom_right, 0.05, 0.04, wave_time_scale),
-		
-		wave_v2(top_left, 0.0, 0.0, wave_time_scale)
-		};
-	
-	vec3 wave_sums = vec3(0.0);
-	
-	for (int i = 0; i < wave_array.length(); i++) {
-		wave_sums.x += wave_array[i].x;
-		wave_sums.y += wave_array[i].y;
-		wave_sums.z += wave_array[i].z;
-	}
+	vec3 wave_sums = fbm(VERTEX * wave_scale, 4.0);
 	
 	wave_sums *= (wave_intensity * (1.0 - UV.x));
 	
 	VERTEX.y += wave_sums.x;
 	
-	NORMAL += normalize(vec3(wave_sums.y, 1.0, wave_sums.z));
+	NORMAL += normalize(vec3(-wave_sums.y, 1.0, -wave_sums.z));
 }
 
 void fragment() {
