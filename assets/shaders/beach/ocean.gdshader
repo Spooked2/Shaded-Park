@@ -1,4 +1,5 @@
 shader_type spatial;
+//render_mode diffuse_toon, specular_toon;
 
 uniform sampler2D water_color_gradient;
 uniform sampler2D wave_break_noise;
@@ -109,8 +110,6 @@ void fragment() {
 	flow = 0.5 * (1.0 - (flow));
 	flow *= 1.5;
 	
-	ALPHA *= max(smoothstep(1.0, 0.6, UV.x), 0.85);
-	
 	// Only apply the swash wave to the designated area
 	if (swash_wave > 0.0) {
 		ALPHA *= smoothstep(0.7, 0.2, flow * swash_wave);
@@ -123,6 +122,13 @@ void fragment() {
 	}
 	
 	ALBEDO = final_color;
+	
+	// Apply BRDF stuff
+	//float fresnel = sqrt(1.0 - dot(NORMAL, VIEW));
+	//RIM = 0.2;
+	//METALLIC = 0.0;
+	//ROUGHNESS = 0.01 * (1.0 - fresnel);
+	//ALBEDO = final_color + (0.1 * fresnel);
 }
 
 void light() {
