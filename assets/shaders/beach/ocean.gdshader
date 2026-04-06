@@ -9,7 +9,7 @@ uniform float wave_time_scale: hint_range(0.0, 2.0) = 0.2;
 uniform float wave_intensity: hint_range(0.0, 5.0) = 1.0;
 uniform float wave_scale: hint_range(0.0, 4.0) = 1.0;
 
-const int wave_detail = 128;
+const int wave_detail = 64;
 
 vec2 wave(float amp, float x, float wavelength, float speed) {
 	float freq = 2.0 / wavelength;

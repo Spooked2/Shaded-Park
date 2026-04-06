@@ -7,10 +7,74 @@
 [sub_resource type="Environment" id="Environment_k8g7j"]
 background_color = Color(0.3372549, 0.39607844, 0.49019608, 1)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k8g7j"]
+noise_type = 2
+seed = 3
+frequency = 0.0056
+fractal_octaves = 3
+fractal_lacunarity = 1.86
+fractal_gain = 0.1
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3bnml"]
+noise = SubResource("FastNoiseLite_k8g7j")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.404
+bump_strength = 10.0
+
+[sub_resource type="Gradient" id="Gradient_xiuwc"]
+offsets = PackedFloat32Array(0.015873017, 0.5, 0.9444444)
+colors = PackedColorArray(0.47213274, 0.3970826, 0.18467838, 1, 0.7411467, 0.6363859, 0.3447301, 1, 0.8918861, 0.79817784, 0.54355586, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2wo80"]
+noise_type = 3
+frequency = 0.0072
+fractal_octaves = 8
+fractal_gain = 0.995
+domain_warp_enabled = true
+domain_warp_fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3wert"]
+noise = SubResource("FastNoiseLite_2wo80")
+color_ramp = SubResource("Gradient_xiuwc")
+seamless = true
+normalize = false
+seamless_blend_skirt = 0.401
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_07d7i"]
+noise_type = 3
+frequency = 0.0445
+fractal_octaves = 6
+fractal_lacunarity = 2.245
+fractal_gain = 0.815
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2wo80"]
+noise = SubResource("FastNoiseLite_07d7i")
+seamless = true
+as_normal_map = true
+bump_strength = 7.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3bnml"]
+noise_type = 0
+frequency = 0.0052
+fractal_octaves = 6
+fractal_gain = 1.54
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xiuwc"]
+noise = SubResource("FastNoiseLite_3bnml")
+as_normal_map = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8g7j"]
 render_priority = 0
 shader = ExtResource("1_h5dy1")
 shader_parameter/base_color = Color(0.7613454, 0.65521103, 0.36146313, 1)
+shader_parameter/color_noise = SubResource("NoiseTexture2D_3wert")
+shader_parameter/coarse_bump_noise = SubResource("NoiseTexture2D_3bnml")
+shader_parameter/fine_bump_noise = SubResource("NoiseTexture2D_2wo80")
+shader_parameter/glitter_noise = SubResource("NoiseTexture2D_xiuwc")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
 size = Vector2(35, 50)
@@ -60,9 +124,17 @@ shader_parameter/wave_scale = 1.0000000475
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=341217798]
 environment = SubResource("Environment_k8g7j")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=598865741]
-transform = Transform3D(-3.2150513e-08, -0.89219993, -0.45164073, -2.9614695e-08, -0.45164073, 0.89219993, -1, 4.2059884e-08, -1.1901749e-08, -49.45382, 24.154816, -5.404437)
+[node name="SunNoon" type="DirectionalLight3D" parent="." unique_id=598865741]
+transform = Transform3D(1.2174371e-07, -0.8925858, -0.45087755, 3.9416967e-08, -0.45087755, 0.8925858, -1, -1.2643895e-07, -1.9708484e-08, -49.45382, 24.154816, -5.404437)
 light_color = Color(0.99892086, 0.8995953, 0.6727849, 1)
+light_energy = 6.0
+light_angular_distance = 0.5
+shadow_enabled = true
+
+[node name="SunEvening" type="DirectionalLight3D" parent="." unique_id=292549406]
+transform = Transform3D(6.248415e-08, -0.21473533, -0.9766723, 8.5383405e-08, -0.9766723, 0.21473533, -1, -9.680916e-08, -4.2691703e-08, -48.416496, 23.654034, 18.654835)
+visible = false
+light_color = Color(0.9708834, 0.7660917, 0.3612064, 1)
 light_energy = 6.0
 light_angular_distance = 0.5
 shadow_enabled = true
