@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://bgq8astuw5c5g" path="res://assets/shaders/beach/sand.gdshader" id="1_h5dy1"]
 [ext_resource type="Shader" uid="uid://v78gugtikg7c" path="res://assets/shaders/beach/ocean.gdshader" id="1_hrlhh"]
 [ext_resource type="PackedScene" uid="uid://b37vsb5jvvn11" path="res://entities/player/player.tscn" id="1_k8g7j"]
+[ext_resource type="Shader" uid="uid://ogblpkrpjmsx" path="res://assets/shaders/beach/rock_wall.gdshader" id="4_3bnml"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8g7j"]
 sky_top_color = Color(0.38431373, 0.49019608, 0.89411765, 1)
@@ -91,7 +92,8 @@ shader_parameter/glitter_noise = SubResource("NoiseTexture2D_xiuwc")
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
 size = Vector2(35, 50)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k8g7j"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xiuwc"]
+size = Vector3(35.021004, 1, 50.065796)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hrlhh"]
 size = Vector2(50, 50)
@@ -131,6 +133,40 @@ shader_parameter/wave_time_scale = 0.5070000240825
 shader_parameter/wave_intensity = 1.0000000475
 shader_parameter/wave_scale = 0.4130000196175
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiuwc"]
+render_priority = 0
+shader = ExtResource("4_3bnml")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_07d7i"]
+size = Vector2(40, 15)
+subdivide_width = 128
+subdivide_depth = 128
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2wo80"]
+size = Vector3(39.82965, 0.70654297, 15.161346)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3wert"]
+resource_local_to_scene = true
+size = Vector3(35.25, 0.5, 20.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yqmdv"]
+size = Vector3(35, 5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dt0by"]
+size = Vector3(35.5, 6.2617292, 20.256)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3bnml"]
+size = Vector2(32.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3bnml"]
+size = Vector3(32.380608, 0.4298401, 10.027954)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3bnml"]
+size = Vector3(3.25, 0.3, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_07d7i"]
+size = Vector3(3.2763367, 0.47088623, 10.012024)
+
 [node name="Beach" type="Node3D" unique_id=1092459270]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=341217798]
@@ -167,10 +203,91 @@ material_override = SubResource("ShaderMaterial_k8g7j")
 mesh = SubResource("PlaneMesh_i3yn0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sand" unique_id=898193961]
-visible = false
-shape = SubResource("WorldBoundaryShape3D_k8g7j")
+transform = Transform3D(0.99888986, -0.047106452, 0, 0.047106452, 0.99888986, 0, 0, 0, 1, -0.29549846, -0.10009971, 0.014465332)
+shape = SubResource("BoxShape3D_xiuwc")
 
 [node name="Ocean" type="MeshInstance3D" parent="." unique_id=2001608621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.574984, 0, 0)
 mesh = SubResource("PlaneMesh_hrlhh")
 surface_material_override/0 = SubResource("ShaderMaterial_h5dy1")
+
+[node name="RockWallRight" type="StaticBody3D" parent="." unique_id=2075914458]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.9815845, -24.456486)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RockWallRight" unique_id=1896776085]
+material_override = SubResource("ShaderMaterial_xiuwc")
+mesh = SubResource("PlaneMesh_07d7i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RockWallRight" unique_id=1608037090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18154907, -0.14672852, 0.042312622)
+shape = SubResource("BoxShape3D_2wo80")
+
+[node name="RockWallLeft" type="StaticBody3D" parent="." unique_id=949231016]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.9815845, 24.585497)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RockWallLeft" unique_id=2099969311]
+material_override = SubResource("ShaderMaterial_xiuwc")
+mesh = SubResource("PlaneMesh_07d7i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RockWallLeft" unique_id=1069507093]
+shape = SubResource("BoxShape3D_2wo80")
+
+[node name="BeachWall1" type="StaticBody3D" parent="." unique_id=1315895156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.458122, 1.0525944, 14.712939)
+
+[node name="BottomTrim" type="MeshInstance3D" parent="BeachWall1" unique_id=1004796681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+mesh = SubResource("BoxMesh_3wert")
+
+[node name="CenterRocks" type="MeshInstance3D" parent="BeachWall1" unique_id=134727136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.75, 0)
+mesh = SubResource("BoxMesh_yqmdv")
+
+[node name="TopTrim" type="MeshInstance3D" parent="BeachWall1" unique_id=615416845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5.5, 0)
+mesh = SubResource("BoxMesh_3wert")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeachWall1" unique_id=1177782171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.651703, -0.0021362305)
+shape = SubResource("BoxShape3D_dt0by")
+
+[node name="BeachWall2" type="StaticBody3D" parent="." unique_id=220403083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.458122, 1.0525944, -14.821664)
+
+[node name="BottomTrim" type="MeshInstance3D" parent="BeachWall2" unique_id=16472103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+mesh = SubResource("BoxMesh_3wert")
+
+[node name="CenterRocks" type="MeshInstance3D" parent="BeachWall2" unique_id=83863865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.75, 0)
+mesh = SubResource("BoxMesh_yqmdv")
+
+[node name="TopTrim" type="MeshInstance3D" parent="BeachWall2" unique_id=1379857668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5.5, 0)
+mesh = SubResource("BoxMesh_3wert")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeachWall2" unique_id=1579835173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.6310675, -0.0021362305)
+shape = SubResource("BoxShape3D_dt0by")
+
+[node name="BeachRamp" type="StaticBody3D" parent="." unique_id=413521509]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 31.409782, 3.8044786, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BeachRamp" unique_id=1328345203]
+transform = Transform3D(1.0000007, -7.4505806e-08, 0, 7.4505806e-08, 1.0000007, 0, 0, 0, 1, 1.4575157, -0.09246755, 0)
+mesh = SubResource("PlaneMesh_3bnml")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeachRamp" unique_id=1012178173]
+transform = Transform3D(1.0000031, -4.917383e-07, 0, 4.917383e-07, 1.0000031, 0, 0, 0, 1, 1.5484867, -0.28508043, 0.019714355)
+shape = SubResource("BoxShape3D_3bnml")
+
+[node name="BeachRampTop" type="StaticBody3D" parent="." unique_id=342445708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.669117, 6.8394356, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BeachRampTop" unique_id=1797995904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, -0.187, 0)
+mesh = SubResource("BoxMesh_3bnml")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeachRampTop" unique_id=67115914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2061615, -0.26455688, -0.0034484863)
+shape = SubResource("BoxShape3D_07d7i")
