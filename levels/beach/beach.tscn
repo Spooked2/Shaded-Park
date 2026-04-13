@@ -4,8 +4,20 @@
 [ext_resource type="Shader" uid="uid://v78gugtikg7c" path="res://assets/shaders/beach/ocean.gdshader" id="1_hrlhh"]
 [ext_resource type="PackedScene" uid="uid://b37vsb5jvvn11" path="res://entities/player/player.tscn" id="1_k8g7j"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8g7j"]
+sky_top_color = Color(0.38431373, 0.49019608, 0.89411765, 1)
+sky_horizon_color = Color(0.6516191, 0.9116147, 0.99601465, 1)
+ground_bottom_color = Color(0.013618596, 0.42422864, 0.72289276, 1)
+ground_horizon_color = Color(0.5088442, 0.779305, 0.99583155, 1)
+sun_angle_max = 11.43
+
+[sub_resource type="Sky" id="Sky_3bnml"]
+sky_material = SubResource("ProceduralSkyMaterial_k8g7j")
+
 [sub_resource type="Environment" id="Environment_k8g7j"]
+background_mode = 2
 background_color = Color(0.3372549, 0.39607844, 0.49019608, 1)
+sky = SubResource("Sky_3bnml")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k8g7j"]
 noise_type = 2
@@ -126,14 +138,14 @@ environment = SubResource("Environment_k8g7j")
 
 [node name="SunNoon" type="DirectionalLight3D" parent="." unique_id=598865741]
 transform = Transform3D(1.2174371e-07, -0.8925858, -0.45087755, 3.9416967e-08, -0.45087755, 0.8925858, -1, -1.2643895e-07, -1.9708484e-08, -49.45382, 24.154816, -5.404437)
+visible = false
 light_color = Color(0.99892086, 0.8995953, 0.6727849, 1)
-light_energy = 6.0
+light_energy = 4.55
 light_angular_distance = 0.5
 shadow_enabled = true
 
 [node name="SunEvening" type="DirectionalLight3D" parent="." unique_id=292549406]
 transform = Transform3D(6.248415e-08, -0.21473533, -0.9766723, 8.5383405e-08, -0.9766723, 0.21473533, -1, -9.680916e-08, -4.2691703e-08, -48.416496, 23.654034, 18.654835)
-visible = false
 light_color = Color(0.9708834, 0.7660917, 0.3612064, 1)
 light_energy = 6.0
 light_angular_distance = 0.5
