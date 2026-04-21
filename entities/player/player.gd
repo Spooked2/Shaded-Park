@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed: float = 2.65
+var speed: float = 6.65
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var look_direction: Vector2 = Vector2()
 var mouse_sensitivity: float = 17.5
