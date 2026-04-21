@@ -19,9 +19,11 @@ void vertex() {
 	float shore = step(distance(UV.x, 0.0), 0.25);
 	float main_path = step(distance(UV.y, 0.5), 0.085);
 	
+	main_path = max(main_path - step(distance(UV.x, 0.0), 0.98), 0.0);
+	
 	float flattening_mask = 1.0 - min((shore + main_path), 1.0);
 	
-	height *= max(flattening_mask, 0.3);
+	height *= max(flattening_mask, 0.25);
 	
 	VERTEX.y += height;
 }
