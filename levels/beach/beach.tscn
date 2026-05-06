@@ -5,6 +5,8 @@
 [ext_resource type="Shader" uid="uid://ba5pey2ba6dlj" path="res://assets/shaders/beach/beach_sand.gdshader" id="2_3bnml"]
 [ext_resource type="Shader" uid="uid://ogblpkrpjmsx" path="res://assets/shaders/beach/rock_wall.gdshader" id="4_3bnml"]
 [ext_resource type="Shader" uid="uid://ye0tit18apmu" path="res://assets/shaders/sand_area/main_area_sand.gdshader" id="5_xiuwc"]
+[ext_resource type="Script" uid="uid://bkwvpy8agbqc2" path="res://common/shell_texturing_layer_generator.gd" id="6_2wo80"]
+[ext_resource type="Shader" uid="uid://d4kcxlhqgfm2t" path="res://assets/shaders/grass_field/grass.gdshader" id="6_07d7i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8g7j"]
 sky_top_color = Color(0.38431373, 0.49019608, 0.89411765, 1)
@@ -322,21 +324,47 @@ size = Vector3(114.910706, 0.1, 170.20872)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yqmdv"]
 size = Vector2(20, 80)
+subdivide_width = 32
+subdivide_depth = 64
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yqmdv"]
 size = Vector3(20, 0.001, 80)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3wert"]
 size = Vector2(105, 20)
+subdivide_width = 64
+subdivide_depth = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_itq4u"]
 size = Vector3(105, 0.001, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2wo80"]
 size = Vector2(95, 20)
+subdivide_width = 64
+subdivide_depth = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rxr2x"]
 size = Vector3(95, 0.001, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ibpch"]
+size = Vector3(129.54578, 0.001, 99.83606)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wo80"]
+render_priority = 0
+shader = ExtResource("6_07d7i")
+shader_parameter/density = 256.0
+shader_parameter/layer_seperation = 0.005
+shader_parameter/thickness = 0.9
+shader_parameter/ground_color = Color(0.15245196, 0.043011278, 0.008483996, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fflcb"]
+size = Vector2(95, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7bk2b"]
+size = Vector2(130, 60)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1xxrc"]
+size = Vector2(60, 20)
 
 [node name="Level" type="Node3D" unique_id=1092459270]
 
@@ -686,6 +714,7 @@ shape = SubResource("BoxShape3D_3wert")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SandArea/DinerSide" unique_id=17925673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 0, -65)
+material_override = SubResource("ShaderMaterial_1xxrc")
 mesh = SubResource("PlaneMesh_yqmdv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SandArea/DinerSide" unique_id=498302618]
@@ -696,6 +725,7 @@ shape = SubResource("BoxShape3D_yqmdv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SandArea/PoolSide" unique_id=643811810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -95.2)
+material_override = SubResource("ShaderMaterial_1xxrc")
 mesh = SubResource("PlaneMesh_3wert")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SandArea/PoolSide" unique_id=1575544149]
@@ -706,8 +736,46 @@ shape = SubResource("BoxShape3D_itq4u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SandArea/FireplaceSide" unique_id=1063408512]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 95)
+material_override = SubResource("ShaderMaterial_1xxrc")
 mesh = SubResource("PlaneMesh_2wo80")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SandArea/FireplaceSide" unique_id=1072495019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 95)
 shape = SubResource("BoxShape3D_rxr2x")
+
+[node name="GrassField" type="Node3D" parent="." unique_id=1781750277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 6.7, 45)
+
+[node name="MainGrass" type="StaticBody3D" parent="GrassField" unique_id=21836730 node_paths=PackedStringArray("base_meshes", "mesh_container")]
+script = ExtResource("6_2wo80")
+layer_amount = 16
+base_meshes = [NodePath("GrassTop"), NodePath("GrassCenter"), NodePath("GrassBottom")]
+mesh_container = NodePath(".")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassField/MainGrass" unique_id=155910482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.727112, 0, 9.913429)
+shape = SubResource("BoxShape3D_ibpch")
+
+[node name="GrassTop" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=1627553536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -30.165)
+material_override = SubResource("ShaderMaterial_2wo80")
+cast_shadow = 0
+instance_shader_parameters/is_ground = true
+instance_shader_parameters/layer_count = 16
+mesh = SubResource("PlaneMesh_fflcb")
+
+[node name="GrassCenter" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=422810773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 9.834999)
+material_override = SubResource("ShaderMaterial_2wo80")
+cast_shadow = 0
+instance_shader_parameters/is_ground = true
+instance_shader_parameters/layer_count = 16
+mesh = SubResource("PlaneMesh_7bk2b")
+
+[node name="GrassBottom" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=887395564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 49.83)
+material_override = SubResource("ShaderMaterial_2wo80")
+cast_shadow = 0
+instance_shader_parameters/is_ground = true
+instance_shader_parameters/layer_count = 16
+mesh = SubResource("PlaneMesh_1xxrc")
