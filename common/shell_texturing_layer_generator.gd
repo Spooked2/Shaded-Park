@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func generate_layers() -> void:
 	for layer: MeshInstance3D in layers:
-		if layer != null:
+		if layer != null and is_instance_valid(layer):
 			layer.queue_free()
 	
 	layers.clear()

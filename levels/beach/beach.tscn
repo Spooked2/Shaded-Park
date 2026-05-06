@@ -353,8 +353,11 @@ size = Vector3(129.54578, 0.001, 99.83606)
 render_priority = 0
 shader = ExtResource("6_07d7i")
 shader_parameter/density = 256.0
-shader_parameter/layer_seperation = 0.005
 shader_parameter/thickness = 0.9
+shader_parameter/strand_height = 0.095
+shader_parameter/max_height = 5.0
+shader_parameter/taper_strength = 7.0
+shader_parameter/displacement_strength = 0.045
 shader_parameter/ground_color = Color(0.15245196, 0.043011278, 0.008483996, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fflcb"]
@@ -748,7 +751,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 6.7, 45)
 
 [node name="MainGrass" type="StaticBody3D" parent="GrassField" unique_id=21836730 node_paths=PackedStringArray("base_meshes", "mesh_container")]
 script = ExtResource("6_2wo80")
-layer_amount = 16
+layer_amount = 64
 base_meshes = [NodePath("GrassTop"), NodePath("GrassCenter"), NodePath("GrassBottom")]
 mesh_container = NodePath(".")
 
@@ -761,7 +764,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -30.165)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 64
 mesh = SubResource("PlaneMesh_fflcb")
 
 [node name="GrassCenter" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=422810773]
@@ -769,13 +772,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 9.834999)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 64
 mesh = SubResource("PlaneMesh_7bk2b")
 
 [node name="GrassBottom" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=887395564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 49.83)
 material_override = SubResource("ShaderMaterial_2wo80")
-cast_shadow = 0
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 64
 mesh = SubResource("PlaneMesh_1xxrc")

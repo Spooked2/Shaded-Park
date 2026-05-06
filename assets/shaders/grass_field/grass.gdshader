@@ -1,8 +1,11 @@
 shader_type spatial;
 
 uniform float density = 128;
-uniform float layer_seperation = 0.005;
 uniform float thickness = 0.9;
+uniform float strand_height = 0.095;
+uniform float max_height = 5.0;
+uniform float taper_strength = 7.0;
+uniform float displacement_strength = 2.0;
 uniform vec4 ground_color: source_color;
 instance uniform int layer_count;
 instance uniform int layer_index;
@@ -19,11 +22,18 @@ float hash11( uint n ) {
 }
 
 void vertex() {
-	height = float(layer_index) * layer_seperation;
+	float seperation = strand_height / float(layer_count);
+	
+	height = float(layer_index) * seperation;
 	
 	VERTEX.y += height;
 	
 	squared_uv = VERTEX.xz * UV;
+	
+	float value = hash11(uint((squared_uv * density).x));
+	value = (value * 2.0) - 1.0;
+	
+	VERTEX += vec3(value, -0.3, value) * displacement_strength * (float(layer_index) / float(layer_count));
 }
 
 void fragment() {
@@ -41,21 +51,26 @@ void fragment() {
 		
 		float local_space_length = length(local_space);
 		
-		if (local_space_length > (thickness - (height * 2.0))) {
+		if (local_space_length > (thickness - (height * taper_strength))) {
 			discard;
 		}
 		
-		bool is_visible = (value - (height * 8.0)) > 0.1;
+		bool is_visible = (value - (height * max_height)) > 0.1;
 		
 		if (!is_visible) {
 			discard;
 		}
 		
 		ALBEDO = vec3(0.0, (0.01 + height * 8.0), 0.0);
+		//ALBEDO = vec3(0.0, 0.8, 0.0);
 	}
 }
 
 //void light() {
-//	// Called for every pixel for every light affecting the material.
-//	// Uncomment to replace the default light processing function with this one.
+	//vec3 half_way = normalize(VIEW + LIGHT);
+	//float half_way_dot = dot(NORMAL, half_way);
+	//float specular_amount = pow(half_way_dot, 200.0) * ATTENUATION;
+	////SPECULAR_LIGHT += 0.2 * specular_amount * LIGHT_COLOR;
+	//
+	//DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * LIGHT_COLOR / PI;
 //}
