@@ -7,6 +7,8 @@ uniform float max_height = 5.0;
 uniform float taper_strength = 7.0;
 uniform float displacement_strength = 2.0;
 uniform vec4 ground_color: source_color;
+uniform float detail_fade_distance_multiplier: hint_range(0.0, 0.4, 0.001) = 0.06;
+uniform sampler2D fallback_noise;
 instance uniform int layer_count;
 instance uniform int layer_index;
 instance uniform bool is_ground = false;
@@ -37,32 +39,53 @@ void vertex() {
 }
 
 void fragment() {
+	// Code partially copied from Qtan1 on godotshaders.com
+	// https://godotshaders.com/shader/camera-distance-uv-scaling/
+	vec3 world_camera = (INV_VIEW_MATRIX * vec4(vec3(0.0), 1.0)).xyz;
+	vec3 world_fragment = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	float fragment_distance = distance(world_camera, world_fragment);
+	
+	fragment_distance *= detail_fade_distance_multiplier;
+	
+	bool is_detailed = fragment_distance < 0.9;
+	
+	if (!is_detailed && layer_index != layer_count && !is_ground) {
+		discard;
+	}
+	
 	if (is_ground) {
 		ALBEDO = ground_color.rgb;
 	} else {
-		vec2 uv_density = squared_uv * density;
-		uvec2 uv_density_int = uvec2(floor(uv_density));
 		
-		uint seed = uv_density_int.x + 100u * uv_density_int.y + 1000u;
-		
-		float value = hash11(seed);
-		
-		vec2 local_space = fract(uv_density) * 2.0 - 1.0;
-		
-		float local_space_length = length(local_space);
-		
-		if (local_space_length > (thickness - (height * taper_strength))) {
-			discard;
+		if (is_detailed) {
+			vec2 uv_density = squared_uv * density;
+			uvec2 uv_density_int = uvec2(floor(uv_density));
+			
+			uint seed = uv_density_int.x + 100u * uv_density_int.y + 1000u;
+			
+			float value = hash11(seed);
+			
+			vec2 local_space = fract(uv_density) * 2.0 - 1.0;
+			
+			float local_space_length = length(local_space);
+			
+			if (local_space_length > (thickness - (height * taper_strength))) {
+				discard;
+			}
+			
+			bool is_visible = (value - (height * max_height)) > 0.1;
+			
+			if (!is_visible) {
+				discard;
+			}
+			
+			ALBEDO = vec3(0.0, (0.01 + height * 8.0), 0.0);
+			
+		} else {
+			float fallback_noise_value = texture(fallback_noise, squared_uv).r;
+			
+			ALBEDO = vec3(0.0, fallback_noise_value, 0.0);
 		}
-		
-		bool is_visible = (value - (height * max_height)) > 0.1;
-		
-		if (!is_visible) {
-			discard;
-		}
-		
-		ALBEDO = vec3(0.0, (0.01 + height * 8.0), 0.0);
-		//ALBEDO = vec3(0.0, 0.8, 0.0);
 	}
 }
 

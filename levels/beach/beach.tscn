@@ -349,6 +349,18 @@ size = Vector3(95, 0.001, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ibpch"]
 size = Vector3(129.54578, 0.001, 99.83606)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yqmdv"]
+noise_type = 0
+seed = 23
+frequency = 0.0411
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_itq4u"]
+noise = SubResource("FastNoiseLite_yqmdv")
+seamless = true
+in_3d_space = true
+seamless_blend_skirt = 0.305
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wo80"]
 render_priority = 0
 shader = ExtResource("6_07d7i")
@@ -359,6 +371,8 @@ shader_parameter/max_height = 5.0
 shader_parameter/taper_strength = 7.0
 shader_parameter/displacement_strength = 0.045
 shader_parameter/ground_color = Color(0.15245196, 0.043011278, 0.008483996, 1)
+shader_parameter/detail_fade_distance_multiplier = 0.06
+shader_parameter/fallback_noise = SubResource("NoiseTexture2D_itq4u")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fflcb"]
 size = Vector2(95, 20)
