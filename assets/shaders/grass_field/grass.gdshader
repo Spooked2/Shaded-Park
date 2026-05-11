@@ -1,14 +1,16 @@
 shader_type spatial;
 
-uniform float density = 128;
-uniform float thickness = 0.9;
-uniform float strand_height = 0.095;
+uniform float density = 200;
+uniform float thickness = 1.3;
+uniform float strand_height = 0.08;
+uniform float min_height = 0.0;
 uniform float max_height = 5.0;
-uniform float taper_strength = 7.0;
-uniform float displacement_strength = 2.0;
+uniform float taper_strength = 10.0;
+uniform float displacement_strength = 0.015;
 uniform vec4 ground_color: source_color;
 uniform float detail_fade_distance_multiplier: hint_range(0.0, 0.4, 0.001) = 0.06;
 uniform sampler2D fallback_noise;
+
 instance uniform int layer_count;
 instance uniform int layer_index;
 instance uniform bool is_ground = false;
@@ -53,10 +55,9 @@ void fragment() {
 		discard;
 	}
 	
-	if (is_ground) {
+	if (is_ground && is_detailed) {
 		ALBEDO = ground_color.rgb;
 	} else {
-		
 		if (is_detailed) {
 			vec2 uv_density = squared_uv * density;
 			uvec2 uv_density_int = uvec2(floor(uv_density));
@@ -73,7 +74,9 @@ void fragment() {
 				discard;
 			}
 			
-			bool is_visible = (value - (height * max_height)) > 0.1;
+			float random_number = smoothstep(min_height, max_height, value);
+			
+			bool is_visible = height < random_number;
 			
 			if (!is_visible) {
 				discard;
@@ -84,7 +87,7 @@ void fragment() {
 		} else {
 			float fallback_noise_value = texture(fallback_noise, squared_uv).r;
 			
-			ALBEDO = vec3(0.0, fallback_noise_value, 0.0);
+			ALBEDO = vec3(0.0, 0.1 + fallback_noise_value, 0.0);
 		}
 	}
 }
