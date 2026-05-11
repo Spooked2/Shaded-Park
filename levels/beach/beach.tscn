@@ -352,8 +352,8 @@ size = Vector3(129.54578, 0.001, 99.83606)
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yqmdv"]
 noise_type = 0
 seed = 23
-frequency = 0.0814
-fractal_weighted_strength = 0.41
+frequency = 0.0311
+fractal_weighted_strength = 1.0
 domain_warp_enabled = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_itq4u"]
@@ -367,13 +367,13 @@ render_priority = 0
 shader = ExtResource("6_07d7i")
 shader_parameter/density = 200.0
 shader_parameter/thickness = 1.3
-shader_parameter/strand_height = 0.08
+shader_parameter/strand_height = 0.1
 shader_parameter/min_height = 0.0
 shader_parameter/max_height = 5.0
 shader_parameter/taper_strength = 10.0
-shader_parameter/displacement_strength = 0.015
+shader_parameter/displacement_strength = 0.21
 shader_parameter/ground_color = Color(0.15245196, 0.043011278, 0.008483996, 1)
-shader_parameter/detail_fade_distance_multiplier = 0.0350000016625
+shader_parameter/detail_fade_distance_multiplier = 0.0230000010925
 shader_parameter/fallback_noise = SubResource("NoiseTexture2D_itq4u")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fflcb"]

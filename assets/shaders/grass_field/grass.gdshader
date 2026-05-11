@@ -34,10 +34,7 @@ void vertex() {
 	
 	squared_uv = VERTEX.xz * UV;
 	
-	float value = hash11(uint((squared_uv * density).x));
-	value = (value * 2.0) - 1.0;
-	
-	VERTEX += vec3(value, -0.3, value) * displacement_strength * (float(layer_index) / float(layer_count));
+	VERTEX += vec3(0.1, -0.1, 0.1) * displacement_strength * (float(layer_index) / float(layer_count));
 }
 
 void fragment() {
@@ -57,6 +54,7 @@ void fragment() {
 	
 	if (is_ground && is_detailed) {
 		ALBEDO = ground_color.rgb;
+		SPECULAR = 0.1;
 	} else {
 		if (is_detailed) {
 			vec2 uv_density = squared_uv * density;
