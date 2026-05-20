@@ -590,7 +590,6 @@ size = Vector2(95, 20)
 size = Vector2(130, 60)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1xxrc"]
-lightmap_size_hint = Vector2i(302, 102)
 size = Vector2(60, 20)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rxr2x"]
@@ -1157,6 +1156,7 @@ shape = SubResource("BoxShape3D_ibpch")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -30.165)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
+gi_mode = 0
 instance_shader_parameters/is_ground = true
 instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_fflcb")
@@ -1165,6 +1165,7 @@ mesh = SubResource("PlaneMesh_fflcb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 9.834999)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
+gi_mode = 0
 instance_shader_parameters/is_ground = true
 instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_7bk2b")
@@ -1172,6 +1173,7 @@ mesh = SubResource("PlaneMesh_7bk2b")
 [node name="GrassBottom" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=887395564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 49.83)
 material_override = SubResource("ShaderMaterial_2wo80")
+gi_mode = 0
 instance_shader_parameters/is_ground = true
 instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_1xxrc")
