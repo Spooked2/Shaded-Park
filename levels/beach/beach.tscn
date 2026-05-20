@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://ye0tit18apmu" path="res://assets/shaders/sand_area/main_area_sand.gdshader" id="5_xiuwc"]
 [ext_resource type="Script" uid="uid://bkwvpy8agbqc2" path="res://common/shell_texturing_layer_generator.gd" id="6_2wo80"]
 [ext_resource type="Shader" uid="uid://d4kcxlhqgfm2t" path="res://assets/shaders/grass_field/grass.gdshader" id="6_07d7i"]
+[ext_resource type="Shader" uid="uid://xsyih84g1lsh" path="res://assets/shaders/concrete.gdshader" id="6_dt0by"]
 [ext_resource type="Shader" uid="uid://bah58qe8atuoy" path="res://assets/shaders/set_piece_rock.gdshader" id="8_3wert"]
 [ext_resource type="LightmapGIData" uid="uid://dnecxvj5xqc4b" path="res://assets/baked_light_maps/beach.lmbake" id="9_yqmdv"]
 
@@ -143,6 +144,41 @@ subdivide_depth = 128
 [sub_resource type="BoxShape3D" id="BoxShape3D_2wo80"]
 size = Vector3(39.82965, 0.70654297, 15.161346)
 
+[sub_resource type="Gradient" id="Gradient_itq4u"]
+offsets = PackedFloat32Array(0, 0.12938596, 0.54605263, 0.8399123)
+colors = PackedColorArray(0.11119685, 0.11119684, 0.11119684, 1, 0.40570176, 0.40570176, 0.40570176, 1, 0.4777379, 0.4777379, 0.4777379, 1, 0.6158288, 0.6158284, 0.6158285, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7bk2b"]
+seed = 6
+frequency = 0.02
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b7pq7"]
+noise = SubResource("FastNoiseLite_7bk2b")
+color_ramp = SubResource("Gradient_itq4u")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5qkn7"]
+noise_type = 5
+frequency = 0.075
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tppdn"]
+noise = SubResource("FastNoiseLite_5qkn7")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlrc6"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_3wert"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(281, 187)
@@ -154,6 +190,14 @@ lightmap_size_hint = Vector2i(279, 231)
 add_uv2 = true
 size = Vector3(35, 5, 20)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ph8np"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_xiuwc"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(331, 237)
@@ -163,11 +207,35 @@ size = Vector3(45.25, 0.5, 20.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dt0by"]
 size = Vector3(45.38562, 6.2617292, 20.256)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q76kq"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdyar"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_07d7i"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(331, 237)
 add_uv2 = true
 size = Vector3(45.25, 0.5, 20.25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44dpd"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3bnml"]
 lightmap_size_hint = Vector2i(164, 52)
@@ -176,6 +244,14 @@ size = Vector2(32.5, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3bnml"]
 size = Vector3(32.380608, 0.4298401, 10.027954)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uyuk"]
+render_priority = 0
+shader = ExtResource("6_dt0by")
+shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
+shader_parameter/color_scale = 2.0
+shader_parameter/normal_scale = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_3bnml"]
 lightmap_size_hint = Vector2i(120, 75)
@@ -760,6 +836,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.458122, 1.0525944, 14.7129
 
 [node name="BottomTrim" type="MeshInstance3D" parent="Beach/BeachWall1" unique_id=1004796681]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+material_override = SubResource("ShaderMaterial_nlrc6")
 mesh = SubResource("BoxMesh_3wert")
 
 [node name="CenterRocks" type="MeshInstance3D" parent="Beach/BeachWall1" unique_id=134727136]
@@ -768,6 +845,7 @@ mesh = SubResource("BoxMesh_yqmdv")
 
 [node name="TopTrim" type="MeshInstance3D" parent="Beach/BeachWall1" unique_id=615416845]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5.5, 0)
+material_override = SubResource("ShaderMaterial_ph8np")
 mesh = SubResource("BoxMesh_xiuwc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/BeachWall1" unique_id=1177782171]
@@ -779,6 +857,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.458122, 1.0525944, -14.821
 
 [node name="BottomTrim" type="MeshInstance3D" parent="Beach/BeachWall2" unique_id=16472103]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+material_override = SubResource("ShaderMaterial_q76kq")
 mesh = SubResource("BoxMesh_3wert")
 
 [node name="CenterRocks" type="MeshInstance3D" parent="Beach/BeachWall2" unique_id=83863865]
@@ -787,6 +866,7 @@ mesh = SubResource("BoxMesh_yqmdv")
 
 [node name="TopTrim" type="MeshInstance3D" parent="Beach/BeachWall2" unique_id=1379857668]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5.5, 0)
+material_override = SubResource("ShaderMaterial_gdyar")
 mesh = SubResource("BoxMesh_07d7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/BeachWall2" unique_id=1579835173]
@@ -798,6 +878,7 @@ transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Beach/BeachRamp" unique_id=1328345203]
 transform = Transform3D(1.0000007, -7.4505806e-08, 0, 7.4505806e-08, 1.0000007, 0, 0, 0, 1, 1.4575157, -0.09246755, 0)
+material_override = SubResource("ShaderMaterial_44dpd")
 mesh = SubResource("PlaneMesh_3bnml")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/BeachRamp" unique_id=1012178173]
@@ -809,6 +890,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.669, 6.839, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Beach/BeachRampTop" unique_id=1797995904]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, -0.187, 0)
+material_override = SubResource("ShaderMaterial_6uyuk")
 mesh = SubResource("BoxMesh_3bnml")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/BeachRampTop" unique_id=67115914]
