@@ -774,7 +774,7 @@ data = PackedVector3Array(0.4136, -0.072, 0.99679995, -0.27449998, 0.015, 0.3733
 environment = SubResource("Environment_k8g7j")
 
 [node name="SunEvening" type="DirectionalLight3D" parent="." unique_id=292549406]
-transform = Transform3D(6.248415e-08, -0.21473533, -0.9766723, 8.5383405e-08, -0.9766723, 0.21473533, -1, -9.680916e-08, -4.26917e-08, -48.416496, 23.654034, 18.654835)
+transform = Transform3D(0.258819, -0.20741843, -0.943393, -8.5383405e-08, -0.9766723, 0.21473533, -0.9659258, -0.055577505, -0.2527814, -48.416496, 23.654034, 18.654835)
 light_color = Color(0.9708834, 0.7660917, 0.3612064, 1)
 light_energy = 6.0
 light_angular_distance = 0.5
