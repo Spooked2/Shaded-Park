@@ -169,7 +169,7 @@ noise = SubResource("FastNoiseLite_5qkn7")
 seamless = true
 in_3d_space = true
 as_normal_map = true
-bump_strength = 4.0
+bump_strength = 1.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nlrc6"]
 render_priority = 0
@@ -177,7 +177,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_3wert"]
 resource_local_to_scene = true
@@ -196,7 +196,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_xiuwc"]
 resource_local_to_scene = true
@@ -213,7 +213,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gdyar"]
 render_priority = 0
@@ -221,7 +221,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_07d7i"]
 resource_local_to_scene = true
@@ -235,7 +235,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3bnml"]
 lightmap_size_hint = Vector2i(164, 52)
@@ -251,7 +251,7 @@ shader = ExtResource("6_dt0by")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_b7pq7")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_tppdn")
 shader_parameter/color_scale = 2.0
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_3bnml"]
 lightmap_size_hint = Vector2i(120, 75)
