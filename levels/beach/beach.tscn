@@ -39,7 +39,7 @@ height = 1024
 noise = SubResource("FastNoiseLite_07d7i")
 seamless = true
 normalize = false
-seamless_blend_skirt = 0.35
+seamless_blend_skirt = 0.4
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yqmdv"]
 width = 1024
@@ -47,8 +47,7 @@ height = 1024
 noise = SubResource("FastNoiseLite_07d7i")
 seamless = true
 as_normal_map = true
-normalize = false
-seamless_blend_skirt = 0.35
+seamless_blend_skirt = 0.123
 bump_strength = 3.0
 
 [sub_resource type="Gradient" id="Gradient_xiuwc"]
@@ -76,8 +75,8 @@ shader = ExtResource("2_3bnml")
 shader_parameter/color_noise = SubResource("NoiseTexture2D_3wert")
 shader_parameter/bump_noise = SubResource("NoiseTexture2D_2wo80")
 shader_parameter/bump_normal = SubResource("NoiseTexture2D_yqmdv")
-shader_parameter/bump_scale = 0.35
-shader_parameter/normal_scale = 0.15
+shader_parameter/bump_scale = 0.24
+shader_parameter/normal_scale = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i3yn0"]
 size = Vector2(35, 50)
@@ -767,7 +766,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 6.7, 45)
 
 [node name="MainGrass" type="StaticBody3D" parent="GrassField" unique_id=21836730 node_paths=PackedStringArray("base_meshes", "mesh_container")]
 script = ExtResource("6_2wo80")
-layer_amount = 16
+layer_amount = 36
 base_meshes = [NodePath("GrassTop"), NodePath("GrassCenter"), NodePath("GrassBottom")]
 mesh_container = NodePath(".")
 
@@ -780,7 +779,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -30.165)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_fflcb")
 
 [node name="GrassCenter" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=422810773]
@@ -788,12 +787,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 9.834999)
 material_override = SubResource("ShaderMaterial_2wo80")
 cast_shadow = 0
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_7bk2b")
 
 [node name="GrassBottom" type="MeshInstance3D" parent="GrassField/MainGrass" unique_id=887395564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 49.83)
 material_override = SubResource("ShaderMaterial_2wo80")
 instance_shader_parameters/is_ground = true
-instance_shader_parameters/layer_count = 16
+instance_shader_parameters/layer_count = 36
 mesh = SubResource("PlaneMesh_1xxrc")
