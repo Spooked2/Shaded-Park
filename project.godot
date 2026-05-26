@@ -81,3 +81,14 @@ escape={
 
 rendering_device/driver.windows="d3d12"
 environment/ssao/quality=0
+
+[shader_globals]
+
+wind_direction={
+"type": "vec2",
+"value": Vector2(-1, 1)
+}
+wind_intensity={
+"type": "float",
+"value": 1.0
+}
