@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bkwvpy8agbqc2" path="res://common/shell_texturing_layer_generator.gd" id="6_2wo80"]
 [ext_resource type="Shader" uid="uid://d4kcxlhqgfm2t" path="res://assets/shaders/grass_field/grass.gdshader" id="6_07d7i"]
 [ext_resource type="Shader" uid="uid://xsyih84g1lsh" path="res://assets/shaders/concrete.gdshader" id="6_dt0by"]
+[ext_resource type="PackedScene" uid="uid://df4wr7oaxb84o" path="res://assets/props/palm_tree/palm_tree.tscn" id="7_itq4u"]
 [ext_resource type="Shader" uid="uid://bah58qe8atuoy" path="res://assets/shaders/set_piece_rock.gdshader" id="8_3wert"]
 [ext_resource type="LightmapGIData" uid="uid://dnecxvj5xqc4b" path="res://assets/baked_light_maps/beach.lmbake" id="9_yqmdv"]
 
@@ -896,6 +897,11 @@ mesh = SubResource("BoxMesh_3bnml")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/BeachRampTop" unique_id=67115914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18637848, -0.26455688, -0.0034484863)
 shape = SubResource("BoxShape3D_07d7i")
+
+[node name="Props" type="Node3D" parent="Beach" unique_id=1588669487]
+
+[node name="PalmTree1" parent="Beach/Props" unique_id=1982005729 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.17269, 6.8351617, 17.631393)
 
 [node name="MainPaths" type="Node3D" parent="." unique_id=2084017938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 0)

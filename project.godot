@@ -84,11 +84,19 @@ environment/ssao/quality=0
 
 [shader_globals]
 
-wind_direction={
-"type": "vec2",
-"value": Vector2(-1, 1)
-}
 wind_intensity={
 "type": "float",
 "value": 1.0
+}
+wind_noise={
+"type": "sampler2D",
+"value": "::s8cyn"
+}
+wind_direction={
+"type": "vec3",
+"value": Vector3(1, -1, 1)
+}
+wind_scroll_speed={
+"type": "float",
+"value": 0.1
 }
