@@ -90,7 +90,7 @@ wind_intensity={
 }
 wind_noise={
 "type": "sampler2D",
-"value": "::s8cyn"
+"value": "res://assets/textures/wind_noise_texture.tres"
 }
 wind_direction={
 "type": "vec3",
