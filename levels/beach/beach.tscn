@@ -262,6 +262,26 @@ size = Vector3(13.25, 0.3, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_07d7i"]
 size = Vector3(13.273922, 0.47088623, 10.012024)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fflcb"]
+size = Vector3(15.019318, 1.3974609, 5.211426)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7bk2b"]
+lightmap_size_hint = Vector2i(79, 91)
+add_uv2 = true
+size = Vector3(15, 1, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1xxrc"]
+lightmap_size_hint = Vector2i(29, 40)
+add_uv2 = true
+size = Vector3(0.15, 1, 4.85)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b7pq7"]
+size = Vector2(14.85, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itq4u"]
+albedo_color = Color(0.2927323, 0.13306844, 0.041176073, 1)
+metallic_specular = 0.05
+
 [sub_resource type="Curve3D" id="Curve3D_3bnml"]
 closed = true
 _data = {
@@ -901,7 +921,78 @@ shape = SubResource("BoxShape3D_07d7i")
 [node name="Props" type="Node3D" parent="Beach" unique_id=1588669487]
 
 [node name="PalmTree1" parent="Beach/Props" unique_id=1982005729 instance=ExtResource("7_itq4u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.17269, 6.8351617, 17.631393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.35357, 7.6042037, 15.367533)
+
+[node name="PalmTree2" parent="Beach/Props" unique_id=1992703078 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.909523, 7.6042037, 15.915625)
+
+[node name="PalmTree3" parent="Beach/Props" unique_id=1618311190 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.609352, 7.6042037, 14.4153805)
+
+[node name="PalmTree4" parent="Beach/Props" unique_id=1594009209 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.391346, 7.6042037, -14.654417)
+
+[node name="PalmTree5" parent="Beach/Props" unique_id=1133902661 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.926018, 7.6042037, -16.173397)
+
+[node name="PalmTree6" parent="Beach/Props" unique_id=1094039082 instance=ExtResource("7_itq4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.630447, 7.6042037, -13.934879)
+
+[node name="Planter1" type="StaticBody3D" parent="Beach" unique_id=1333628138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 6.9, 15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/Planter1" unique_id=922915305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0033721924, 0.19873047, 0.005126953)
+shape = SubResource("BoxShape3D_fflcb")
+
+[node name="PlanterWall1" type="MeshInstance3D" parent="Beach/Planter1" unique_id=1168800793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -2.5)
+mesh = SubResource("BoxMesh_7bk2b")
+
+[node name="PlanterWall2" type="MeshInstance3D" parent="Beach/Planter1" unique_id=1712815141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 2.5)
+mesh = SubResource("BoxMesh_7bk2b")
+
+[node name="PlanterWall3" type="MeshInstance3D" parent="Beach/Planter1" unique_id=1450048581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.425, 0.4, 0)
+mesh = SubResource("BoxMesh_1xxrc")
+
+[node name="PlanterWall4" type="MeshInstance3D" parent="Beach/Planter1" unique_id=139028909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.425, 0.4, 0)
+mesh = SubResource("BoxMesh_1xxrc")
+
+[node name="Dirt" type="MeshInstance3D" parent="Beach/Planter1" unique_id=759724736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("PlaneMesh_b7pq7")
+surface_material_override/0 = SubResource("StandardMaterial3D_itq4u")
+
+[node name="Planter2" type="StaticBody3D" parent="Beach" unique_id=1146388142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 6.9, -15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/Planter2" unique_id=741542039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0033721924, 0.19873047, 0.005126953)
+shape = SubResource("BoxShape3D_fflcb")
+
+[node name="PlanterWall1" type="MeshInstance3D" parent="Beach/Planter2" unique_id=148564502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -2.5)
+mesh = SubResource("BoxMesh_7bk2b")
+
+[node name="PlanterWall2" type="MeshInstance3D" parent="Beach/Planter2" unique_id=34023540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 2.5)
+mesh = SubResource("BoxMesh_7bk2b")
+
+[node name="PlanterWall3" type="MeshInstance3D" parent="Beach/Planter2" unique_id=1774678877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.425, 0.4, 0)
+mesh = SubResource("BoxMesh_1xxrc")
+
+[node name="PlanterWall4" type="MeshInstance3D" parent="Beach/Planter2" unique_id=248545955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.425, 0.4, 0)
+mesh = SubResource("BoxMesh_1xxrc")
+
+[node name="Dirt" type="MeshInstance3D" parent="Beach/Planter2" unique_id=2065763319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("PlaneMesh_b7pq7")
+surface_material_override/0 = SubResource("StandardMaterial3D_itq4u")
 
 [node name="MainPaths" type="Node3D" parent="." unique_id=2084017938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 0)
