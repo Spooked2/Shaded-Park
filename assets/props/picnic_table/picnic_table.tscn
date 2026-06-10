@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dvy1dj3m85viv"]
+
+[ext_resource type="PackedScene" uid="uid://ceb4k8xekcw20" path="res://assets/props/picnic_table/picnic_table.glb" id="1_rah4r"]
+[ext_resource type="Shader" uid="uid://dwuuh2n721xjn" path="res://assets/props/picnic_table/picnic_table.gdshader" id="2_mcqwp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlg1f"]
+render_priority = 0
+shader = ExtResource("2_mcqwp")
+shader_parameter/base_color = Color(0.89013845, 0.6275903, 0.30972466, 1)
+
+[node name="PicnicTable" unique_id=1522306389 instance=ExtResource("1_rah4r")]
+
+[node name="Table" parent="." index="0" unique_id=286817761]
+surface_material_override/0 = SubResource("ShaderMaterial_nlg1f")
