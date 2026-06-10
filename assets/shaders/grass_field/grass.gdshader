@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode depth_prepass_alpha;
 
 uniform float density = 200;
 uniform float thickness = 1.3;
