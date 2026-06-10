@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://gg5ko1avaj5"]
+
+[ext_resource type="PackedScene" uid="uid://c0ojrxn2qp533" path="res://assets/props/park_bench/park_bench.glb" id="1_2ni6k"]
+[ext_resource type="Shader" uid="uid://ba0e5hvyihoko" path="res://park_bench.gdshader" id="2_q3wrv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_poauq"]
+render_priority = 0
+shader = ExtResource("2_q3wrv")
+shader_parameter/base_color = Color(0.45115227, 0.30286688, 0.1293962, 1)
+
+[node name="ParkBench" unique_id=2077341601 instance=ExtResource("1_2ni6k")]
+
+[node name="Bench" parent="." index="0" unique_id=1962478836]
+surface_material_override/0 = SubResource("ShaderMaterial_poauq")

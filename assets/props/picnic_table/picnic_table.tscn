@@ -55,9 +55,9 @@ size = Vector3(1.5527954, 0.42700195, 1.7978516)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nlg1f"]
 size = Vector3(0.7485695, 0.39038086, 1.7978516)
 
-[node name="PicnicTable" unique_id=1522306389 instance=ExtResource("1_rah4r")]
+[node name="PicnicTable" unique_id=1382420715 instance=ExtResource("1_rah4r")]
 
-[node name="Table" parent="." index="0" unique_id=286817761]
+[node name="Table" parent="." index="0" unique_id=80547684]
 mesh = SubResource("ArrayMesh_mcqwp")
 surface_material_override/0 = SubResource("ShaderMaterial_nlg1f")
 

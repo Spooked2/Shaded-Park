@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://xsyih84g1lsh" path="res://assets/shaders/concrete.gdshader" id="6_dt0by"]
 [ext_resource type="PackedScene" uid="uid://df4wr7oaxb84o" path="res://assets/props/palm_tree/palm_tree.tscn" id="7_itq4u"]
 [ext_resource type="Shader" uid="uid://bah58qe8atuoy" path="res://assets/shaders/set_piece_rock.gdshader" id="8_3wert"]
+[ext_resource type="PackedScene" uid="uid://gg5ko1avaj5" path="res://assets/props/park_bench/park_bench.tscn" id="8_ibpch"]
 [ext_resource type="LightmapGIData" uid="uid://dnecxvj5xqc4b" path="res://assets/baked_light_maps/beach.lmbake" id="9_yqmdv"]
 [ext_resource type="PackedScene" uid="uid://dvy1dj3m85viv" path="res://assets/props/picnic_table/picnic_table.tscn" id="11_rxr2x"]
 
@@ -924,20 +925,62 @@ shape = SubResource("BoxShape3D_07d7i")
 [node name="PalmTree1" parent="Beach/Props" unique_id=1982005729 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.35357, 7.6042037, 15.367533)
 
-[node name="PalmTree2" parent="Beach/Props" unique_id=1992703078 instance=ExtResource("7_itq4u")]
+[node name="PalmTree2" parent="Beach/Props" unique_id=443048535 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.909523, 7.6042037, 15.915625)
 
-[node name="PalmTree3" parent="Beach/Props" unique_id=1618311190 instance=ExtResource("7_itq4u")]
+[node name="PalmTree3" parent="Beach/Props" unique_id=36422709 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.609352, 7.6042037, 14.4153805)
 
-[node name="PalmTree4" parent="Beach/Props" unique_id=1594009209 instance=ExtResource("7_itq4u")]
+[node name="PalmTree4" parent="Beach/Props" unique_id=1739381026 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.391346, 7.6042037, -14.654417)
 
-[node name="PalmTree5" parent="Beach/Props" unique_id=1133902661 instance=ExtResource("7_itq4u")]
+[node name="PalmTree5" parent="Beach/Props" unique_id=79241330 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.926018, 7.6042037, -16.173397)
 
-[node name="PalmTree6" parent="Beach/Props" unique_id=1094039082 instance=ExtResource("7_itq4u")]
+[node name="PalmTree6" parent="Beach/Props" unique_id=5127810 instance=ExtResource("7_itq4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.630447, 7.6042037, -13.934879)
+
+[node name="ParkBench1" parent="Beach/Props" unique_id=2077341601 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, -8.257824)
+
+[node name="ParkBench8" parent="Beach/Props" unique_id=835542033 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, 7.8115196)
+
+[node name="ParkBench9" parent="Beach/Props" unique_id=1254308144 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, 12.823403)
+
+[node name="ParkBench10" parent="Beach/Props" unique_id=1683645076 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, 17.842625)
+
+[node name="ParkBench11" parent="Beach/Props" unique_id=980466109 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 21.676428, 6.8145285, 23.506063)
+
+[node name="ParkBench12" parent="Beach/Props" unique_id=592629579 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 26.708078, 6.8145285, 23.506063)
+
+[node name="ParkBench13" parent="Beach/Props" unique_id=127295450 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 31.79069, 6.8145285, 23.506063)
+
+[node name="ParkBench14" parent="Beach/Props" unique_id=1837710441 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 36.8107, 6.8145285, 23.506063)
+
+[node name="ParkBench2" parent="Beach/Props" unique_id=1827827228 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, -13.251301)
+
+[node name="ParkBench3" parent="Beach/Props" unique_id=1010036202 instance=ExtResource("8_ibpch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.423416, 6.8145285, -18.244778)
+
+[node name="ParkBench4" parent="Beach/Props" unique_id=385710949 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 23.596127, 6.8145285, -23.254572)
+
+[node name="ParkBench5" parent="Beach/Props" unique_id=51345152 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 28.685549, 6.8145285, -23.254572)
+
+[node name="ParkBench6" parent="Beach/Props" unique_id=2100181516 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 33.685158, 6.8145285, -23.254572)
+
+[node name="ParkBench7" parent="Beach/Props" unique_id=1281784422 instance=ExtResource("8_ibpch")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 38.714706, 6.8145285, -23.254572)
 
 [node name="Planter1" type="StaticBody3D" parent="Beach" unique_id=1333628138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 6.9, 15)
@@ -1360,55 +1403,55 @@ mesh = SubResource("PlaneMesh_1xxrc")
 [node name="PicnicTable1" parent="GrassField/Props" unique_id=1522306389 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.99920905, 0, -0.03976555, 0, 1, 0, 0.03976555, 0, 0.99920905, -31.03508, 0.00049972534, -16.337917)
 
-[node name="PicnicTable2" parent="GrassField/Props" unique_id=858991984 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable2" parent="GrassField/Props" unique_id=730578411 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.99756294, 0, 0.06977389, 0, 1, 0, -0.06977389, 0, 0.99756294, -31.760742, 0.00049972534, -8.680637)
 
-[node name="PicnicTable3" parent="GrassField/Props" unique_id=1128069903 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable3" parent="GrassField/Props" unique_id=725998090 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.9980875, 0, -0.061815023, 0, 1, 0, 0.061815023, 0, 0.9980875, -25.722801, 0.00049972534, -8.583759)
 
-[node name="PicnicTable4" parent="GrassField/Props" unique_id=1179367326 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable4" parent="GrassField/Props" unique_id=1120140403 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.99724895, 0, -0.074125856, 0, 1, 0, 0.074125856, 0, 0.99724895, -25.003067, 0.00049972534, -15.753941)
 
-[node name="PicnicTable5" parent="GrassField/Props" unique_id=1486273712 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable5" parent="GrassField/Props" unique_id=1183540900 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.9985826, 0, -0.053224795, 0, 1, 0, 0.053224795, 0, 0.9985826, -18.328957, 0.00049972534, -15.753941)
 
-[node name="PicnicTable6" parent="GrassField/Props" unique_id=1208094998 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable6" parent="GrassField/Props" unique_id=1967137430 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.99944913, 0, -0.033190027, 0, 1, 0, 0.033190027, 0, 0.99944913, -18.441452, 0.00049972534, -8.82082)
 
-[node name="PicnicTable7" parent="GrassField/Props" unique_id=444185215 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable7" parent="GrassField/Props" unique_id=733244206 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.06312144, 0, 0.99800587, 0, 1, 0, -0.99800587, 0, 0.06312144, 11.21994, 0.00049972534, 5.082554)
 
-[node name="PicnicTable8" parent="GrassField/Props" unique_id=2099206827 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable8" parent="GrassField/Props" unique_id=1405261234 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.046426542, 0, 0.9989218, 0, 1, 0, -0.9989218, 0, -0.046426542, 18.85817, 0.00049972534, 5.987072)
 
-[node name="PicnicTable9" parent="GrassField/Props" unique_id=322666621 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable9" parent="GrassField/Props" unique_id=102971013 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.08513865, 0, 0.99636906, 0, 1, 0, -0.99636906, 0, 0.08513865, 19.096207, 0.00049972534, -0.04694748)
 
-[node name="PicnicTable10" parent="GrassField/Props" unique_id=1548923025 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable10" parent="GrassField/Props" unique_id=1409105354 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.097426504, 0, 0.9952428, 0, 1, 0, -0.9952428, 0, 0.097426504, 11.944824, 0.00049972534, -0.9341545)
 
-[node name="PicnicTable11" parent="GrassField/Props" unique_id=1261582226 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable11" parent="GrassField/Props" unique_id=45335860 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.07656235, 0, 0.9970649, 0, 1, 0, -0.9970649, 0, 0.07656235, 12.100906, 0.00049972534, -7.6064453)
 
-[node name="PicnicTable12" parent="GrassField/Props" unique_id=2105151030 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable12" parent="GrassField/Props" unique_id=1926696455 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(0.056553327, 0, 0.9983997, 0, 1, 0, -0.9983997, 0, 0.056553327, 19.029495, 0.00049972534, -7.3318405)
 
-[node name="PicnicTable13" parent="GrassField/Props" unique_id=812704265 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable13" parent="GrassField/Props" unique_id=141088337 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.04499688, 0, 0.9989872, 0, 1, 0, -0.9989872, 0, -0.04499688, 39.15892, 0.00049972534, 40.736023)
 
-[node name="PicnicTable14" parent="GrassField/Props" unique_id=1672473375 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable14" parent="GrassField/Props" unique_id=696968629 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.15400341, 0, 0.9880704, 0, 1, 0, -0.9880704, 0, -0.15400341, 46.85016, 0.00049972534, 40.810593)
 
-[node name="PicnicTable15" parent="GrassField/Props" unique_id=710962320 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable15" parent="GrassField/Props" unique_id=395478949 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.02293165, 0, 0.999737, 0, 1, 0, -0.999737, 0, -0.02293165, 46.435333, 0.00049972534, 34.78614)
 
-[node name="PicnicTable16" parent="GrassField/Props" unique_id=538098518 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable16" parent="GrassField/Props" unique_id=1799183098 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.010594025, 0, 0.999944, 0, 1, 0, -0.999944, 0, -0.010594025, 39.229965, 0.00049972534, 34.676216)
 
-[node name="PicnicTable17" parent="GrassField/Props" unique_id=347544854 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable17" parent="GrassField/Props" unique_id=2044368865 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.03153295, 0, 0.99950284, 0, 1, 0, -0.99950284, 0, -0.03153295, 38.664764, 0.00049972534, 28.02607)
 
-[node name="PicnicTable18" parent="GrassField/Props" unique_id=1199948722 instance=ExtResource("11_rxr2x")]
+[node name="PicnicTable18" parent="GrassField/Props" unique_id=1694341211 instance=ExtResource("11_rxr2x")]
 transform = Transform3D(-0.051569115, 0, 0.9986695, 0, 1, 0, -0.9986695, 0, -0.051569115, 45.582504, 0.00049972534, 27.55104)
 
 [node name="SetPieceRock" type="StaticBody3D" parent="." unique_id=169472250]
